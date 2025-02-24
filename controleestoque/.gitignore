@@ -1,0 +1,12 @@
+# Arquivos de banco de dados
+banco_de_dados.mv.db
+
+# Arquivos de build
+target/
+
+# Arquivos de configuração local
+.idea/
+.settings/
+
+# Arquivos temporários
+*.tmp

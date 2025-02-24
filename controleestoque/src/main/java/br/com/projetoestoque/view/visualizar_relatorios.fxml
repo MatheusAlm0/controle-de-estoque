@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.projetoestoque.controller.VisualizarRelatoriosController">
+    <Label text="Visualizar Relatórios" style="-fx-font-size: 20;"/>
+
+    <ComboBox fx:id="relatorioComboBox"/>
+    <Button text="Gerar Relatório" onAction="#gerarRelatorio"/>
+
+    <TextArea fx:id="relatorioTextArea"/>
+</VBox>

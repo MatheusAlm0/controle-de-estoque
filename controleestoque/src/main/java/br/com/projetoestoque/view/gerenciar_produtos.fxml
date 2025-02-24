@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.projetoestoque.controller.GerenciarProdutosController">
+    <Label text="Gerenciar Produtos" style="-fx-font-size: 20;"/>
+
+    <GridPane hgap="10" vgap="5">
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="nomeField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Categoria:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="categoriaComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Preço:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="precoField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Button text="Salvar" onAction="#salvarProduto" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Button text="Editar" onAction="#editarProduto" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Button text="Excluir" onAction="#excluirProduto" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <TableView fx:id="produtosTableView">
+        <columns>
+            <TableColumn text="Nome"/>
+            <TableColumn text="Categoria"/>
+            <TableColumn text="Preço"/>
+        </columns>
+    </TableView>
+</VBox>
