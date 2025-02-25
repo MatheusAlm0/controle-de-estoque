@@ -26,7 +26,9 @@
         <Label text="Senha:" GridPane.rowIndex="2"/>
         <PasswordField fx:id="senhaField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         
-        <Button text="Cadastrar" onAction="#cadastrarUsuario" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Button text="Cadastrar" onAction="#cadastrarUsuario" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Button text="Excluir" onAction="#excluirUsuario" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Button text="Editar" onAction="#editarUsuario" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
     </GridPane>
     
     <TableView fx:id="usuariosTableView" prefHeight="200" prefWidth="400" VBox.vgrow="ALWAYS">

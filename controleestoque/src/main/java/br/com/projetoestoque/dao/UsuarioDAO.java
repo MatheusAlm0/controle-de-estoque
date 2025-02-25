@@ -42,4 +42,25 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+
+    public void excluir(int id) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        try (Connection connection = ConexaoBancoDeDados.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+    }
+
+    public void editar(Usuario usuario) throws SQLException {
+        String sql = "UPDATE usuarios SET nome = ?, nivel_acesso = ?, senha = ? WHERE id = ?";
+        try (Connection connection = ConexaoBancoDeDados.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, usuario.getNome());
+            statement.setString(2, usuario.getNivelAcesso());
+            statement.setString(3, usuario.getSenha());
+            statement.setInt(4, usuario.getId());
+            statement.executeUpdate();
+        }
+    }
 }

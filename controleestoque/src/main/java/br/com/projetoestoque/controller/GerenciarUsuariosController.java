@@ -84,6 +84,56 @@ public class GerenciarUsuariosController {
         }
     }
 
+    @FXML
+    private void excluirUsuario() {
+        Usuario usuarioSelecionado = usuariosTableView.getSelectionModel().getSelectedItem();
+        if (usuarioSelecionado == null) {
+            showAlert("Erro", "Nenhum usuário selecionado!");
+            return;
+        }
+
+        try {
+            usuarioDAO.excluir(usuarioSelecionado.getId());
+            showAlert("Sucesso", "Usuário excluído com sucesso!");
+            carregarUsuarios(); // Atualiza a tabela após a exclusão
+        } catch (SQLException e) {
+            showAlert("Erro", "Erro ao excluir usuário: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void editarUsuario() {
+        Usuario usuarioSelecionado = usuariosTableView.getSelectionModel().getSelectedItem();
+        if (usuarioSelecionado == null) {
+            showAlert("Erro", "Nenhum usuário selecionado!");
+            return;
+        }
+
+        String nome = nomeField.getText().trim();
+        String nivelAcesso = nivelAcessoComboBox.getValue();
+        String senha = senhaField.getText().trim();
+
+        // Verificar se os campos obrigatórios estão preenchidos
+        if (nome.isEmpty() || nivelAcesso == null || senha.isEmpty()) {
+            showAlert("Erro", "Todos os campos são obrigatórios!");
+            return;
+        }
+
+        usuarioSelecionado.setNome(nome);
+        usuarioSelecionado.setNivelAcesso(nivelAcesso);
+        usuarioSelecionado.setSenha(senha);
+
+        try {
+            usuarioDAO.editar(usuarioSelecionado);
+            showAlert("Sucesso", "Usuário editado com sucesso!");
+            carregarUsuarios(); // Atualiza a tabela após a edição
+        } catch (SQLException e) {
+            showAlert("Erro", "Erro ao editar usuário: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
