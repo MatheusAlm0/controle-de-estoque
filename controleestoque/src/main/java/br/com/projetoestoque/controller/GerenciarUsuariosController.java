@@ -52,6 +52,16 @@ public class GerenciarUsuariosController {
         colNivelAcesso.setCellValueFactory(new PropertyValueFactory<>("nivelAcesso"));
         colSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
 
+        // Centraliza o texto nas colunas
+        colNome.setStyle("-fx-alignment: CENTER;");
+        colNivelAcesso.setStyle("-fx-alignment: CENTER;");
+        colSenha.setStyle("-fx-alignment: CENTER;");
+
+        // Configura a largura das colunas da tabela
+        colNome.prefWidthProperty().bind(usuariosTableView.widthProperty().multiply(0.4)); // 40% da largura total
+        colNivelAcesso.prefWidthProperty().bind(usuariosTableView.widthProperty().multiply(0.4)); // 40% da largura total
+        colSenha.prefWidthProperty().bind(usuariosTableView.widthProperty().multiply(0.2)); // 20% da largura total
+    
         // Carrega os usuários da base de dados
         try {
             carregarUsuarios();
