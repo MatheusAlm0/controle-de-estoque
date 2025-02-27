@@ -12,7 +12,7 @@ public class DatabaseInitializer {
     public static void initialize() {
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              BufferedReader reader = new BufferedReader(new InputStreamReader(
-                     DatabaseInitializer.class.getResourceAsStream("/schema.sql")));
+                     DatabaseInitializer.class.getResourceAsStream("/Users/Matheus/Desktop/projeto-controle-estoque/banco_de_dados")));
              Statement statement = connection.createStatement()) {
 
             StringBuilder sql = new StringBuilder();
