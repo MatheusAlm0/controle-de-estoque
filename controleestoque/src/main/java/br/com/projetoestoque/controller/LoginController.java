@@ -1,5 +1,6 @@
 package br.com.projetoestoque.controller;
 
+import br.com.projetoestoque.dao.UsuarioDAO;
 import br.com.projetoestoque.main.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -18,28 +19,21 @@ public class LoginController {
     @FXML
     private Label errorLabel;
 
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+
     @FXML
     private void handleLogin() throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // Aqui você fará a lógica de autenticação
-        if (autenticar(username, password)) {
-            App.setRoot("view/admin"); // Carrega a tela do admin
+        System.out.println("Tentativa de login com usuário: " + username);
+
+        if (usuarioDAO.autenticar(username, password)) {
+            System.out.println("Login bem-sucedido para o usuário: " + username);
+            App.setRoot("view/admin"); 
         } else {
+            System.out.println("Login falhou para o usuário: " + username);
             errorLabel.setText("Usuário ou senha incorretos.");
         }
-    }
-
-    private boolean autenticar(String username, String password) {
-        // ***SUBSTITUA ESTE CÓDIGO DE EXEMPLO PELA SUA LÓGICA DE AUTENTICAÇÃO***
-        // Aqui você deve consultar o banco de dados ou outra fonte de dados
-        // para verificar se o usuário e a senha são válidos.
-
-        // Exemplo (substitua por sua lógica real):
-        if (username.equals("admin") && password.equals("123")) {
-            return true;
-        }
-        return false;
     }
 }

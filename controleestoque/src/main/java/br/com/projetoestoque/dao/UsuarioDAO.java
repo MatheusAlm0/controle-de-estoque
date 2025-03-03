@@ -63,4 +63,25 @@ public class UsuarioDAO {
             statement.executeUpdate();
         }
     }
+
+    public boolean autenticar(String username, String password) {
+        String sql = "SELECT * FROM usuarios WHERE nome = ? AND senha = ?";
+        try (Connection connection = ConexaoBancoDeDados.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                System.out.println("Usuário autenticado com sucesso: " + username);
+                return true;
+            } else {
+                System.out.println("Falha na autenticação para o usuário: " + username);
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    } 
 }
