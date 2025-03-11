@@ -11,8 +11,6 @@
     <left>
         <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #2C3E50;">
             <!-- Botões de Navegação -->
-            <Button text="Gerenciar Usuários" fx:id="btnUsuarios" onAction="#handleUsuarios"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
             <Button text="Gerenciar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
             <Button text="Relatórios" fx:id="btnRelatorios" onAction="#handleRelatorios"
@@ -24,7 +22,7 @@
     <center>
         <StackPane fx:id="contentArea" alignment="CENTER"
                    style="-fx-padding: 30; -fx-background-color: #ECF0F1;">
-            <Label text="Bem-vindo ao Painel Administrativo"
+            <Label text="Bem-vindo ao Painel Operador"
                    style="-fx-font-size: 18; -fx-text-fill: #2C3E50; -fx-font-weight: bold;" />
         </StackPane>
     </center>

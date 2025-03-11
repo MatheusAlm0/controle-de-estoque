@@ -4289,8 +4289,13 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Matheus
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 68 more
+<<<<<<< HEAD
 2025-03-06 18:22:15 database: flush
 org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Matheus/Desktop/projeto-controle-estoque/banco_de_dados.mv.db [2.1.214/7]" [50000-214]
+=======
+2025-03-10 09:40:25 database: flush
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/lscal/Desktop/controle-de-estoque/banco_de_dados.mv.db [2.1.214/7]" [50000-214]
+>>>>>>> 9aa177e266f7004bcd77fccc724771bc31505f8f
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:395)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
@@ -4309,8 +4314,13 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:682)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at br.com.projetoestoque/br.com.projetoestoque.model.ConexaoBancoDeDados.getConnection(ConexaoBancoDeDados.java:14)
+<<<<<<< HEAD
 	at br.com.projetoestoque/br.com.projetoestoque.dao.UsuarioDAO.inserir(UsuarioDAO.java:16)
 	at br.com.projetoestoque/br.com.projetoestoque.controller.GerenciarUsuariosController.cadastrarUsuario(GerenciarUsuariosController.java:88)
+=======
+	at br.com.projetoestoque/br.com.projetoestoque.dao.UsuarioDAO.autenticar(UsuarioDAO.java:69)
+	at br.com.projetoestoque/br.com.projetoestoque.controller.LoginController.handleLogin(LoginController.java:31)
+>>>>>>> 9aa177e266f7004bcd77fccc724771bc31505f8f
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:72)
@@ -4365,11 +4375,19 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at javafx.graphics@21/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@21/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:185)
 	at java.base/java.lang.Thread.run(Thread.java:1575)
+<<<<<<< HEAD
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Matheus/Desktop/projeto-controle-estoque/banco_de_dados.mv.db [2.1.214/7]" [50000-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	... 74 more
 Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Matheus/Desktop/projeto-controle-estoque/banco_de_dados.mv.db [2.1.214/7]
+=======
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/lscal/Desktop/controle-de-estoque/banco_de_dados.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 74 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/lscal/Desktop/controle-de-estoque/banco_de_dados.mv.db [2.1.214/7]
+>>>>>>> 9aa177e266f7004bcd77fccc724771bc31505f8f
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
 	at org.h2.mvstore.FileStore.open(FileStore.java:178)
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)

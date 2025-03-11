@@ -64,24 +64,31 @@ public class UsuarioDAO {
         }
     }
 
-    public boolean autenticar(String username, String password) {
-        String sql = "SELECT * FROM usuarios WHERE nome = ? AND senha = ?";
+    /**
+     * Método que autentica o usuário e retorna seu nível de acesso.
+     * @param username Nome do usuário
+     * @param password Senha do usuário
+     * @return Nível de acesso (admin, operador, gerente, visualizador) ou nulo se não for autenticado.
+     */
+    public String autenticar(String username, String password) {
+        String sql = "SELECT nivel_acesso FROM usuarios WHERE nome = ? AND senha = ?";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
-            
+
             if (resultSet.next()) {
-                System.out.println("Usuário autenticado com sucesso: " + username);
-                return true;
+                String nivelAcesso = resultSet.getString("nivel_acesso");
+                System.out.println("Usuário autenticado com sucesso: " + username + " | Nível: " + nivelAcesso);
+                return nivelAcesso;
             } else {
                 System.out.println("Falha na autenticação para o usuário: " + username);
-                return false;
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
-    } 
+    }
 }
