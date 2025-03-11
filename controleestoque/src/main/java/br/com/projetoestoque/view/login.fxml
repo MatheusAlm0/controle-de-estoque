@@ -2,10 +2,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.Color?>
 
-<VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.projetoestoque.controller.LoginController">
-    <Label text="Login" style="-fx-font-size: 24;"/>
-    <TextField fx:id="usernameField" promptText="Usuário"/>
-    <PasswordField fx:id="passwordField" promptText="Senha"/>
-    <Button text="Entrar" onAction="#handleLogin"/>
-    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red;"/>  </VBox>
+<VBox alignment="CENTER" spacing="15" style="-fx-padding: 30; -fx-background-color: #F4F4F4;"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.projetoestoque.controller.LoginController">
+
+    <!-- Título -->
+    <Label text="Login" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
+    <!-- Card de Login -->
+    <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10; 
+                               -fx-border-color: #DDD; -fx-border-width: 1;">
+        <TextField fx:id="usernameField" promptText="Usuário"
+                   style="-fx-font-size: 14; -fx-padding: 8; -fx-background-radius: 5;" />
+
+        <PasswordField fx:id="passwordField" promptText="Senha"
+                       style="-fx-font-size: 14; -fx-padding: 8; -fx-background-radius: 5;" />
+
+        <Button text="Entrar" onAction="#handleLogin"
+                style="-fx-font-size: 14; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 5;"/>
+
+        <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12;" />
+    </VBox>
+
+</VBox>
