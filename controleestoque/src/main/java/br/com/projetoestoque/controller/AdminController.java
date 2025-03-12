@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import javafx.application.Platform;
 
 public class AdminController {
 
@@ -22,6 +23,9 @@ public class AdminController {
     private Button btnRelatorios;
 
     @FXML
+    private Button btnFechar;
+
+    @FXML
     private void handleUsuarios() throws IOException {
         carregarTela("view/gerenciar_usuarios");
     }
@@ -34,6 +38,11 @@ public class AdminController {
     @FXML
     private void handleRelatorios() throws IOException {
         carregarTela("view/visualizar_relatorios");
+    }
+
+    @FXML
+    private void handleFechar() {
+        Platform.exit();
     }
 
     private void carregarTela(String fxml) throws IOException {

@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Window;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -146,10 +147,14 @@ public class GerenciarUsuariosController {
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+
+    Window window = usuariosTableView.getScene().getWindow();
+    alert.initOwner(window);
+
+    alert.showAndWait();
     }
 
     private void carregarUsuarios() throws SQLException {
