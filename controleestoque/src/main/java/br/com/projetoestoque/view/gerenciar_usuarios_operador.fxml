@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="br.com.projetoestoque.controller.GerenciarUsuariosOperadorController"
+      spacing="15" alignment="CENTER" style="-fx-padding: 20; -fx-background-color: #F4F4F4;">
+
+    <!-- Título -->
+    <Label text="visualizador de  Usuários" 
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
+
+    <!-- ComboBox de Nível de Acesso -->
+    <ComboBox fx:id="nivelAcessoComboBox" />
+
+    <!-- Tabela de Usuários -->
+    <TableView fx:id="usuariosTableView" prefHeight="250" prefWidth="450" VBox.vgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10;">
+        <columns>
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="180">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nome"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colNivelAcesso" text="Nível de Acesso" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nivelAcesso"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colSenha" text="Senha" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="senha"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    
+
+</VBox>

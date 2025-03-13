@@ -5,7 +5,7 @@
 <?import javafx.geometry.Pos?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.com.projetoestoque.controller.AdminController">
+            fx:controller="br.com.projetoestoque.controller.GerenteController">
 
     <!-- Barra lateral com botões de navegação -->
     <left>

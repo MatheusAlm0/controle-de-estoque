@@ -5,17 +5,17 @@
 <?import javafx.geometry.Pos?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.com.projetoestoque.controller.AdminController">
+            fx:controller="br.com.projetoestoque.controller.VisualizadorController">
 
-    <!-- Barra lateral com botões de navegação -->
+   <!-- Barra lateral com botões de navegação -->
     <left>
         <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #2C3E50;">
+
             <!-- Botões de Navegação -->
-            <Button text="Relatórios" fx:id="btnRelatorios" onAction="#handleRelatorios"
+            <Button text="Visualizar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
         </VBox>
     </left>
-
     <!-- Área central onde os conteúdos serão carregados -->
     <center>
         <StackPane fx:id="contentArea" alignment="CENTER"
