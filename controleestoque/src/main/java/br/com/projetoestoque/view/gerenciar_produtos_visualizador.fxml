@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.projetoestoque.controller.VisualizadorProdutosController">
-    <Label text="Gerenciar Produtos" style="-fx-font-size: 20;"/>
-    <TableView fx:id="produtosTableView">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="br.com.projetoestoque.controller.GerenciarProdutosController"
+      spacing="20" alignment="CENTER" 
+      style="-fx-padding: 30; -fx-background-color: #F4F4F4;" 
+      prefWidth="-1" prefHeight="-1"
+      maxWidth="Infinity" maxHeight="Infinity">
+
+    <!-- Título -->
+    <Label text="Visualizar Produtos" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
+
+    <!-- Tabela de Produtos -->
+    <TableView fx:id="produtosTableView" VBox.vgrow="ALWAYS" 
+               style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10;">
         <columns>
-            <TableColumn text="Nome"/>
-            <TableColumn text="Categoria"/>
-            <TableColumn text="Preço"/>
+           <TableColumn fx:id="colId" text="Id" minWidth="185" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="Id"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colCodigo" text="Codigo" minWidth="175" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="Codigo"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colMarca" text="Marca" minWidth="175" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="Marca"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colModelo" text="Modelo" minWidth="175" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="Modelo"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colCategoria" text="Categoria" minWidth="175" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="Categoria"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colquantidade" text="quantidade" minWidth="180" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="quantidade"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colPreco" text="Preço" minWidth="185" resizable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="preco"/>
+                </cellValueFactory>
+            </TableColumn>
         </columns>
     </TableView>
 </VBox>
