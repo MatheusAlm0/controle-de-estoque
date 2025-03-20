@@ -22,7 +22,7 @@ public class LoginController {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     @FXML
-private void handleLogin() throws IOException {
+    private void handleLogin() throws IOException {
     String username = usernameField.getText();
     String password = passwordField.getText();
 
