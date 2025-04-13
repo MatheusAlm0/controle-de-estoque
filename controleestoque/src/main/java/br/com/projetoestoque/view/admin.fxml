@@ -10,21 +10,19 @@
     <!-- Barra lateral com botões de navegação -->
     <left>
         <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #2C3E50;" alignment="TOP_CENTER">
-            <!-- Botões de Navegação -->
-            <Button text="Gerenciar Usuários" fx:id="btnUsuarios" onAction="#handleUsuarios"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
-            <Button text="Gerenciar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
-            <Button text="Relatórios" fx:id="btnRelatorios" onAction="#handleRelatorios"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
-            <!-- Espaçador flexível -->
-            <Pane fx:id="spacer" VBox.vgrow="always" />
-            <!-- Botão de sair na parte inferior -->
-            <HBox alignment="BOTTOM_LEFT">
-                <Button fx:id="btnFechar" onAction="#handleFechar" text="X"
-                        style="-fx-background-color: transparent; -fx-text-fill: #E74C3C; -fx-font-size: 18; -fx-font-weight: bold;" />
-            </HBox>
-        </VBox>
+    <!-- Botões de Navegação -->
+    <Button text="Gerenciar Usuários" fx:id="btnUsuarios" onAction="#handleUsuarios"
+            style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+    <Button text="Gerenciar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
+            style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+    <Button text="Relatórios" fx:id="btnRelatorios" onAction="#handleRelatorios"
+            style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+    <!-- Espaçador flexível -->
+    <Pane fx:id="spacer" VBox.vgrow="always" />
+    <!-- Botão de Logout -->
+    <Button text="Logout" fx:id="btnLogout" onAction="#handleLogout"
+            style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+</VBox>
     </left>
 
     <!-- Área central onde os conteúdos serão carregados -->

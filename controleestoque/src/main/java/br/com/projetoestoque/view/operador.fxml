@@ -15,6 +15,13 @@
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
             <Button text="Gerenciar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+            
+            <!-- Espaçador flexível -->
+            <Pane fx:id="spacer" VBox.vgrow="always" />
+            
+            <!-- Botão de Logout -->
+            <Button text="Logout" fx:id="btnLogout" onAction="#handleLogout"
+                    style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
         </VBox>
     </left>
 
