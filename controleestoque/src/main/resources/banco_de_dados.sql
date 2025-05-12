@@ -5,7 +5,7 @@ CREATE TABLE usuarios (
     senha VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE produtos ( 
+CREATE TABLE produtos (
     id SERIAL PRIMARY KEY,
     codigo VARCHAR(255) NOT NULL,
     marca VARCHAR(255) NOT NULL,

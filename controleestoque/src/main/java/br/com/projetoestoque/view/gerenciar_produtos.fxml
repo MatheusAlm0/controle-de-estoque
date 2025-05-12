@@ -4,20 +4,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.projetoestoque.controller.GerenciarProdutosController"
-      spacing="20" alignment="CENTER" 
-      style="-fx-padding: 30; -fx-background-color: #F4F4F4;" 
+      spacing="20" alignment="CENTER"
+      style="-fx-padding: 30; -fx-background-color: #F4F4F4;"
       prefWidth="-1" prefHeight="-1"
       maxWidth="Infinity" maxHeight="Infinity">
 
-    <!-- Título -->
     <Label text="Gerenciar Produtos" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
 
-    <!-- Formulário de Produtos -->
     <VBox spacing="15" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 10; -fx-border-color: #CCC; -fx-pref-width: 500;">
         <HBox spacing="10" alignment="CENTER" style="-fx-pref-width: 100%;">
-            
+
             <VBox spacing="10" alignment="CENTER">
                 <Label text="Id:" />
                 <TextField fx:id="idField" style="-fx-padding: 5; -fx-font-size: 14;" />
@@ -57,34 +55,28 @@
         </HBox>
     </VBox>
 
-    <!-- Tabela de Produtos -->
-    <TableView fx:id="produtosTableView" VBox.vgrow="ALWAYS" 
+    <TableView fx:id="produtosTableView" VBox.vgrow="ALWAYS"
                style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10;">
         <columns>
            <TableColumn fx:id="colId" text="Id" minWidth="185" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="Id"/>
-                </cellValueFactory>
+                    <PropertyValueFactory property="id"/> </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colCodigo" text="Codigo" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="Codigo"/>
-                </cellValueFactory>
+                    <PropertyValueFactory property="codigo"/> </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colMarca" text="Marca" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="Marca"/>
-                </cellValueFactory>
+                    <PropertyValueFactory property="marca"/> </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colModelo" text="Modelo" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="Modelo"/>
-                </cellValueFactory>
+                    <PropertyValueFactory property="modelo"/> </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colCategoria" text="Categoria" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="Categoria"/>
-                </cellValueFactory>
+                    <PropertyValueFactory property="categoria"/> </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colquantidade" text="quantidade" minWidth="180" resizable="true">
                 <cellValueFactory>
