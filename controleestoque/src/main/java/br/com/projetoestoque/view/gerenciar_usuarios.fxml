@@ -14,32 +14,28 @@
     <Label text="Gerenciamento de Usuários" 
            style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
 
-    <!-- Formulário de Cadastro em um retângulo branco -->
+    <!-- Formulário de Cadastro -->
     <VBox spacing="15" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 10; -fx-border-color: #CCC; -fx-pref-width: 500;">
         
-        <!-- Campos Nome, Nível de Acesso e Senha -->
-        <HBox spacing="10" alignment="CENTER" style="-fx-pref-width: 100%;">
-            
-            <!-- Campo Nome -->
+        <!-- Campos -->
+        <HBox spacing="10" alignment="CENTER">
             <VBox spacing="10" alignment="CENTER">
                 <Label text="Nome:" />
                 <TextField fx:id="nomeField" style="-fx-padding: 5; -fx-font-size: 14;" />
             </VBox>
             
-            <!-- Campo Nível de Acesso -->
             <VBox spacing="10" alignment="CENTER">
                 <Label text="Nível de Acesso:" />
                 <ComboBox fx:id="nivelAcessoComboBox" style="-fx-padding: 5; -fx-font-size: 14;" />
             </VBox>
 
-            <!-- Campo Senha -->
             <VBox spacing="10" alignment="CENTER">
                 <Label text="Senha:" />
                 <PasswordField fx:id="senhaField" style="-fx-padding: 5; -fx-font-size: 14;" />
             </VBox>
         </HBox>
 
-        <!-- Botões de Ação embaixo dos campos -->
+        <!-- Botões -->
         <HBox spacing="10" alignment="CENTER">
             <Button text="Cadastrar" onAction="#cadastrarUsuario"
                     style="-fx-background-color: #27AE60; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
@@ -50,7 +46,14 @@
         </HBox>
     </VBox>
 
-    <!-- Tabela de Usuários -->
+    <!-- Campo de busca -->
+    <HBox alignment="CENTER">
+        <Label text="Buscar por Nome:" style="-fx-font-size: 14;" />
+        <TextField fx:id="buscarField" onKeyReleased="#filtrarUsuarios" 
+                   style="-fx-font-size: 14; -fx-padding: 5; -fx-pref-width: 300; -fx-margin-top: 10;" />
+    </HBox>
+
+    <!-- Tabela -->
     <TableView fx:id="usuariosTableView" prefHeight="250" prefWidth="450" VBox.vgrow="ALWAYS"
                style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10;">
         <columns>
