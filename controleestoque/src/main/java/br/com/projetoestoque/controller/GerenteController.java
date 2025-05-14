@@ -26,6 +26,17 @@ public class GerenteController {
     private Button btnFechar;
 
     @FXML
+    private Button btnLogout;
+
+    @FXML
+    private void handleLogout() throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/br/com/projetoestoque/view/login.fxml"));
+        javafx.scene.Parent loginPane = loader.load(); // Use Parent para evitar problemas de tipo
+    
+        contentArea.getScene().setRoot(loginPane);
+    }
+    @FXML
     private void handleUsuarios() throws IOException {
         carregarTela("view/gerenciar_usuarios_gerente");
     }
