@@ -2,29 +2,50 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.paint.Color?>
+<?import javafx.scene.image.ImageView?>
 
-<VBox alignment="CENTER" spacing="15" style="-fx-padding: 30; -fx-background-color: #F4F4F4;"
+<HBox spacing="0" style="-fx-background-color: linear-gradient(to bottom, #E8F7FF, #FFFFFF);"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.projetoestoque.controller.LoginController">
 
-    <!-- Título -->
-    <Label text="Login" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #333;" />
+    <!-- Seção da Imagem -->
+    <!-- Seção do Formulário -->
+    <VBox alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: white;" prefWidth="400">
+        <!-- Nome do Programa -->
+        <Label text="Estoque Fácil" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
 
-    <!-- Card de Login -->
-    <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-border-radius: 10; 
-                               -fx-border-color: #DDD; -fx-border-width: 1;">
-        <TextField fx:id="usernameField" promptText="Usuário"
-                   style="-fx-font-size: 14; -fx-padding: 8; -fx-background-radius: 5;" />
+        <!-- Título -->
+        <Label text="Login" style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #333;" />
 
-        <PasswordField fx:id="passwordField" promptText="Senha"
-                       style="-fx-font-size: 14; -fx-padding: 8; -fx-background-radius: 5;" />
+        <!-- Formulário -->
+        <VBox spacing="15" style="-fx-padding: 10;">
+            <TextField fx:id="usernameField" promptText="Usuário"
+                       style="-fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #DDD; -fx-border-width: 1;" />
 
-        <Button text="Entrar" onAction="#handleLogin"
-                style="-fx-font-size: 14; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 5;"/>
+            <PasswordField fx:id="passwordField" promptText="Senha"
+                           style="-fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #DDD; -fx-border-width: 1;" />
 
-        <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12;" />
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Hyperlink text="Esqueceu a senha?" style="-fx-font-size: 12;" />
+            </HBox>
+
+            <Button text="Entrar" onAction="#handleLogin"
+                    style="-fx-font-size: 16; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8; 
+                           -fx-padding: 10; -fx-cursor: hand;" />
+        </VBox>
+
+        <!-- Opções de Login -->
+        <Label text="Ou logar com" style="-fx-font-size: 12; -fx-text-fill: #777;" />
+        <HBox alignment="CENTER" spacing="10">
+            <Button text="F" style="-fx-font-size: 16; -fx-background-color: #3b5998; -fx-text-fill: white; -fx-background-radius: 50; 
+                                     -fx-min-width: 40; -fx-min-height: 40;" />
+            <Button text="G" style="-fx-font-size: 16; -fx-background-color: #DB4437; -fx-text-fill: white; -fx-background-radius: 50; 
+                                     -fx-min-width: 40; -fx-min-height: 40;" />
+            <Button text="A" style="-fx-font-size: 16; -fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 50; 
+                                     -fx-min-width: 40; -fx-min-height: 40;" />
+        </HBox>
+
+        <!-- Rodapé -->
+        <Label text="Não tem uma conta? Inscrever-se" style="-fx-font-size: 12; -fx-text-fill: #2196F3;" />
     </VBox>
-
-</VBox>
+</HBox>

@@ -5,23 +5,33 @@
 <?import javafx.geometry.Pos?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.com.projetoestoque.controller.OperadorController">
+            fx:controller="br.com.projetoestoque.controller.GerenteController">
 
     <!-- Barra lateral com botões de navegação -->
     <left>
-        <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #2C3E50;">
+        <VBox spacing="20" style="-fx-padding: 20; -fx-background-color: #2C3E50;" alignment="TOP_CENTER">
+            <!-- Nome do Programa -->
+            <Label text="Estoque Fácil" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Separator style="-fx-background-color: white;" />
+
             <!-- Botões de Navegação -->
-            <Button text="Visualizar Usuários" fx:id="btnUsuarios" onAction="#handleUsuarios"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+            <Button text="Gerenciar Usuários" fx:id="btnUsuarios" onAction="#handleUsuarios"
+                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 8; 
+                           -fx-padding: 10; -fx-cursor: hand;" />
             <Button text="Gerenciar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
-            
+                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 8; 
+                           -fx-padding: 10; -fx-cursor: hand;" />
+            <Button text="Relatórios" fx:id="btnRelatorios" onAction="#handleRelatorios"
+                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 8; 
+                           -fx-padding: 10; -fx-cursor: hand;" />
+
             <!-- Espaçador flexível -->
             <Pane fx:id="spacer" VBox.vgrow="always" />
-            
+
             <!-- Botão de Logout -->
             <Button text="Logout" fx:id="btnLogout" onAction="#handleLogout"
-                    style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
+                    style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 8; 
+                           -fx-padding: 10; -fx-cursor: hand;" />
         </VBox>
     </left>
 
@@ -29,8 +39,12 @@
     <center>
         <StackPane fx:id="contentArea" alignment="CENTER"
                    style="-fx-padding: 30; -fx-background-color: #ECF0F1;">
-            <Label text="Bem-vindo ao Painel Operador"
-                   style="-fx-font-size: 18; -fx-text-fill: #2C3E50; -fx-font-weight: bold;" />
+            <VBox alignment="CENTER" spacing="20">
+                <Label text="Bem-vindo ao Painel do Operador"
+                       style="-fx-font-size: 22; -fx-text-fill: #2C3E50; -fx-font-weight: bold;" />
+                <Label text="Selecione uma opção no menu à esquerda para começar."
+                       style="-fx-font-size: 16; -fx-text-fill: #7F8C8D;" />
+            </VBox>
         </StackPane>
     </center>
 
