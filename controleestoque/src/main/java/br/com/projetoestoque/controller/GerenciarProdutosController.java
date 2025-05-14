@@ -69,22 +69,21 @@ public class GerenciarProdutosController {
 
     @FXML
     private void salvarProduto() {
-        // String id = idField.getText().trim(); // ID não é necessário para inserir um NOVO produto se ele for auto-incremento
-
         String codigo = codigoField.getText().trim();
         String marca = marcaField.getText().trim();
         String modelo = modeloField.getText().trim();
         String categoria = categoriaField.getText().trim();
         String quantidadeStr = quantidadeField.getText().trim();
         String precoStr = precoField.getText().trim();
+        String idStr = idField.getText().trim(); // Capturar o ID
 
-        // Verificar se os campos obrigatórios estão preenchidos (removida a verificação do ID)
+        // Verificar se os campos obrigatórios estão preenchidos
         if (codigo.isEmpty() || marca.isEmpty() || modelo.isEmpty() || categoria.isEmpty() || quantidadeStr.isEmpty() || precoStr.isEmpty()) {
-            showAlert("Erro de Validação", "Todos os campos são obrigatórios!"); // Mensagem mais específica
+            showAlert("Erro de Validação", "Todos os campos são obrigatórios!");
             return;
         }
 
-        double quantidade; // Mantido como double conforme seu Model e UI
+        double quantidade;
         double preco;
         try {
             quantidade = Double.parseDouble(quantidadeStr);
@@ -94,34 +93,48 @@ public class GerenciarProdutosController {
             return;
         }
 
-        // Crie o objeto Produto. Não passe o 'id' se for um novo produto e o banco gerar o ID.
-        Produto novoProduto = new Produto(); // Use o construtor vazio
-        // Não configure o ID para inserção, o banco cuidará disso
-        novoProduto.setCodigo(codigo);
-        novoProduto.setMarca(marca);
-        novoProduto.setModelo(modelo);
-        novoProduto.setCategoria(categoria);
-        novoProduto.setQuantidade(quantidade); // Use o valor convertido
-        novoProduto.setPreco(preco); // Use o valor convertido
+        Produto produtoParaSalvar;
+        if (idStr.isEmpty()) {
+            // Se o ID está vazio, é um novo produto
+            produtoParaSalvar = new Produto();
+        } else {
+            // Caso contrário, é um produto existente que será atualizado
+            produtoParaSalvar = new Produto();
+            produtoParaSalvar.setId(idStr); // Definir o ID para identificação
+        }
+
+        // Preencher os dados
+        produtoParaSalvar.setCodigo(codigo);
+        produtoParaSalvar.setMarca(marca);
+        produtoParaSalvar.setModelo(modelo);
+        produtoParaSalvar.setCategoria(categoria);
+        produtoParaSalvar.setQuantidade(quantidade);
+        produtoParaSalvar.setPreco(preco);
 
         try {
-            // ProdutoDAO produtoDAO = new ProdutoDAO(); // Não instancie o DAO aqui, use a instância da classe
-            produtoDAO.inserir(novoProduto);
-            showAlert("Sucesso", "Produto cadastrado com sucesso!");
-            limparCampos(); // Limpar os campos após o cadastro bem-sucedido
-            carregarProdutosNaTabela(); // Atualiza a tabela após o cadastro
+            if (idStr.isEmpty()) {
+                // Se o ID estiver vazio, é um novo produto, então chama o método para inserir
+                produtoDAO.inserir(produtoParaSalvar);
+                showAlert("Sucesso", "Produto cadastrado com sucesso!");
+            } else {
+                // Caso contrário, faz a atualização
+                produtoDAO.editar(produtoParaSalvar);
+                showAlert("Sucesso", "Produto atualizado com sucesso!");
+            }
+
+            limparCampos(); // Limpar os campos após o salvar
+            carregarProdutosNaTabela(); // Atualiza a tabela após salvar
         } catch (SQLException e) {
-            // Usando showErrorAlert para erros de banco de dados
-            showErrorAlert("Erro no Banco de Dados", "Erro ao cadastrar produto: " + e.getMessage());
-            e.printStackTrace(); // Imprimir stack trace para depuração
+            showErrorAlert("Erro no Banco de Dados", "Erro ao salvar produto: " + e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
-            // Capturar outras exceções inesperadas
-             showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao salvar o produto.");
-             e.printStackTrace();
+            showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao salvar o produto.");
+            e.printStackTrace();
         }
     }
 
-    @FXML
+
+   @FXML
     private void editarProduto() {
         Produto produtoSelecionado = produtosTableView.getSelectionModel().getSelectedItem();
 
@@ -130,43 +143,15 @@ public class GerenciarProdutosController {
             return;
         }
 
-        try {
-            // Atualiza os dados do produto com os campos do formulário
-            produtoSelecionado.setCodigo(codigoField.getText());
-            produtoSelecionado.setMarca(marcaField.getText());
-            produtoSelecionado.setModelo(modeloField.getText());
-            produtoSelecionado.setCategoria(categoriaField.getText());
-            produtoSelecionado.setQuantidade(Double.parseDouble(quantidadeField.getText()));
-            produtoSelecionado.setPreco(Double.parseDouble(precoField.getText()));
-
-            ProdutoDAO produtoDAO = new ProdutoDAO();
-            produtoDAO.editar(produtoSelecionado);
-
-            showAlert("Produto atualizado", "Produto atualizado com sucesso!");
-            atualizarTabela(); // Método que você provavelmente já tem para recarregar a TableView
-            limparCampos();    // Método para limpar os campos do formulário, se existir
-
-        } catch (NumberFormatException e) {
-            showAlert("Erro de formato", "Quantidade e preço devem ser números válidos.");
-        } catch (SQLException e) {
-            showAlert("Erro ao atualizar", "Erro ao tentar atualizar o produto no banco de dados.");
-            e.printStackTrace();
-        }
+        // Preencher os campos com os dados do produto selecionado
+        idField.setText(produtoSelecionado.getId()); // Preencher o campo ID
+        codigoField.setText(produtoSelecionado.getCodigo());
+        marcaField.setText(produtoSelecionado.getMarca());
+        modeloField.setText(produtoSelecionado.getModelo());
+        categoriaField.setText(produtoSelecionado.getCategoria());
+        quantidadeField.setText(String.valueOf(produtoSelecionado.getQuantidade())); // Converter para String
+        precoField.setText(String.valueOf(produtoSelecionado.getPreco())); // Converter para String
     }
-
-    private void atualizarTabela() {
-    try {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        List<Produto> produtos = produtoDAO.listarTodos();
-        produtosTableView.getItems().setAll(produtos);
-    } catch (Exception e) {
-        showAlert("Erro ao carregar produtos", "Não foi possível atualizar a tabela de produtos.");
-        e.printStackTrace();
-    }
-}
-
-
-
 
     @FXML
     private void excluirProduto() {
@@ -187,7 +172,6 @@ public class GerenciarProdutosController {
         }
 
         try {
-            // ProdutoDAO produtoDAO = new ProdutoDAO(); // Não instancie o DAO aqui
             // Converte o id (String do Model) para int para o método excluir do DAO
             int idParaExcluir = Integer.parseInt(produtoSelecionado.getId());
             produtoDAO.excluir(idParaExcluir);
@@ -198,82 +182,67 @@ public class GerenciarProdutosController {
             showErrorAlert("Erro no Banco de Dados", "Erro ao excluir produto: " + e.getMessage());
             e.printStackTrace();
         } catch (NumberFormatException e) {
-            // Ocorre se o ID do produto selecionado não for um número válido ao converter para int
             showErrorAlert("Erro de ID", "ID do produto selecionado inválido para exclusão: " + produtoSelecionado.getId());
             e.printStackTrace();
         } catch (Exception e) {
-             // Captura outras exceções inesperadas durante a exclusão
-             showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao excluir o produto.");
-             e.printStackTrace();
+            showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao excluir o produto.");
+            e.printStackTrace();
         }
     }
 
-    // Método para carregar os produtos do banco e exibir na tabela
-    // Modificado para não lançar SQLException e tratar a exceção internamente
     private void carregarProdutosNaTabela() {
-        // ProdutoDAO produtoDAO = new ProdutoDAO(); // Não instancie o DAO aqui
         try {
             List<Produto> produtos = produtoDAO.listarTodos();
             ObservableList<Produto> produtosList = FXCollections.observableArrayList(produtos);
             produtosTableView.setItems(produtosList);
         } catch (Exception e) {
-             // Captura outras exceções inesperadas durante o carregamento
-             showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao carregar os produtos.");
-             e.printStackTrace();
+            showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao carregar os produtos.");
+            e.printStackTrace();
         }
     }
 
-    // Método auxiliar para limpar os campos do formulário
     private void limparCampos() {
-         idField.clear(); // Limpar o campo ID se for o comportamento desejado após cadastro
-         codigoField.clear();
-         marcaField.clear();
-         modeloField.clear();
-         categoriaField.clear();
-         quantidadeField.clear();
-         precoField.clear();
-         // Opcional: Remover a seleção da tabela após limpar ou salvar/excluir
-         produtosTableView.getSelectionModel().clearSelection();
+        idField.clear(); // Limpar o campo ID se for o comportamento desejado após cadastro
+        codigoField.clear();
+        marcaField.clear();
+        modeloField.clear();
+        categoriaField.clear();
+        quantidadeField.clear();
+        precoField.clear();
+        produtosTableView.getSelectionModel().clearSelection(); // Opcional: Remover a seleção da tabela após limpar ou salvar/excluir
     }
 
-
-    // Método auxiliar para exibir alertas de informação/sucesso
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        // Tentar encontrar a janela dona do alerta de forma mais segura
         Window window = getWindow();
         if (window != null) {
-             alert.initOwner(window);
+            alert.initOwner(window);
         }
         alert.showAndWait();
     }
 
-    // Método auxiliar para exibir alertas de erro
-     private void showErrorAlert(String title, String message) {
+    private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR); // Tipo ERROR
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        // Tentar encontrar a janela dona do alerta
         Window window = getWindow();
         if (window != null) {
-             alert.initOwner(window);
+            alert.initOwner(window);
         }
         alert.showAndWait();
     }
 
-    // Método auxiliar para obter a Window do palco atual
     private Window getWindow() {
         Window window = null;
         if (produtosTableView != null && produtosTableView.getScene() != null) {
-             window = produtosTableView.getScene().getWindow();
+            window = produtosTableView.getScene().getWindow();
         } else if (idField != null && idField.getScene() != null) {
-             window = idField.getScene().getWindow();
+            window = idField.getScene().getWindow();
         }
-        // Adicione outros campos UI se forem mais confiáveis para obter a cena
         return window;
     }
 }
