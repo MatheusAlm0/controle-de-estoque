@@ -46,7 +46,12 @@ public class OperadorController {
 
     @FXML
     private void handleProdutos() throws IOException {
-        carregarTela("view/gerenciar_produtos");
+        carregarTela("view/gerenciar_produtos_operador");
+    }
+
+    @FXML
+    private void handleRelatorios() throws IOException {
+        carregarTela("view/visualizar_relatorios");
     }
 
     @FXML

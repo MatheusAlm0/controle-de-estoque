@@ -5,7 +5,7 @@
 <?import javafx.geometry.Pos?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.com.projetoestoque.controller.GerenteController">
+            fx:controller="br.com.projetoestoque.controller.OperadorController">
 
     <!-- Barra lateral com botões de navegação -->
     <left>
@@ -15,9 +15,6 @@
             <Separator style="-fx-background-color: white;" />
 
             <!-- Botões de Navegação -->
-            <Button text="Gerenciar Usuários" fx:id="btnUsuarios" onAction="#handleUsuarios"
-                    style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 8; 
-                           -fx-padding: 10; -fx-cursor: hand;" />
             <Button text="Gerenciar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 8; 
                            -fx-padding: 10; -fx-cursor: hand;" />
