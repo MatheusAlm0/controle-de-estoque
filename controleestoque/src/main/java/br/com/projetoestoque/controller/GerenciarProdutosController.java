@@ -123,12 +123,49 @@ public class GerenciarProdutosController {
 
     @FXML
     private void editarProduto() {
-        // Implementação do método editarProduto
-        // Você precisaria obter o produto selecionado da tabela,
-        // preencher os campos do formulário com os dados desse produto
-        // e, ao salvar, chamar produtoDAO.editar(produto) com o ID do produto.
-        showAlert("Funcionalidade não implementada", "Função de edição de produto ainda não implementada.");
+        Produto produtoSelecionado = produtosTableView.getSelectionModel().getSelectedItem();
+
+        if (produtoSelecionado == null) {
+            showAlert("Nenhum produto selecionado", "Por favor, selecione um produto na tabela para editar.");
+            return;
+        }
+
+        try {
+            // Atualiza os dados do produto com os campos do formulário
+            produtoSelecionado.setCodigo(codigoField.getText());
+            produtoSelecionado.setMarca(marcaField.getText());
+            produtoSelecionado.setModelo(modeloField.getText());
+            produtoSelecionado.setCategoria(categoriaField.getText());
+            produtoSelecionado.setQuantidade(Double.parseDouble(quantidadeField.getText()));
+            produtoSelecionado.setPreco(Double.parseDouble(precoField.getText()));
+
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            produtoDAO.editar(produtoSelecionado);
+
+            showAlert("Produto atualizado", "Produto atualizado com sucesso!");
+            atualizarTabela(); // Método que você provavelmente já tem para recarregar a TableView
+            limparCampos();    // Método para limpar os campos do formulário, se existir
+
+        } catch (NumberFormatException e) {
+            showAlert("Erro de formato", "Quantidade e preço devem ser números válidos.");
+        } catch (SQLException e) {
+            showAlert("Erro ao atualizar", "Erro ao tentar atualizar o produto no banco de dados.");
+            e.printStackTrace();
+        }
     }
+
+    private void atualizarTabela() {
+    try {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        List<Produto> produtos = produtoDAO.listarTodos();
+        produtosTableView.getItems().setAll(produtos);
+    } catch (Exception e) {
+        showAlert("Erro ao carregar produtos", "Não foi possível atualizar a tabela de produtos.");
+        e.printStackTrace();
+    }
+}
+
+
 
 
     @FXML
