@@ -6,10 +6,12 @@ import br.com.projetoestoque.dao.ProdutoDAO;
 import br.com.projetoestoque.model.Produto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList; // Importar FilteredList
+import javafx.collections.transformation.SortedList; // Importar SortedList (opcional, mas recomendado para a tabela)
 import javafx.stage.Window;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory; // Importe esta classe
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class GerenciarProdutosController {
 
@@ -34,37 +36,76 @@ public class GerenciarProdutosController {
     @FXML
     private TextField precoField;
 
+    // Novo campo para a busca
     @FXML
-    private TableView<Produto> produtosTableView; // Parametrize the TableView with Produto
+    private TextField campoBusca;
 
-    // Adicione as injeções das colunas da TableView
+    @FXML
+    private TableView<Produto> produtosTableView;
+
     @FXML private TableColumn<Produto, String> colId;
     @FXML private TableColumn<Produto, String> colCodigo;
     @FXML private TableColumn<Produto, String> colMarca;
     @FXML private TableColumn<Produto, String> colModelo;
     @FXML private TableColumn<Produto, String> colCategoria;
-    // Tipos da coluna na TableView devem ser compatíveis com o tipo da propriedade no Model (Double para double)
     @FXML private TableColumn<Produto, Double> colquantidade;
     @FXML private TableColumn<Produto, Double> colPreco;
 
-    // Instancie o DAO uma vez na classe
     private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    // Método initialize() - Chamado automaticamente após o FXML ser carregado
+    // Lista original de todos os produtos
+    private ObservableList<Produto> masterData = FXCollections.observableArrayList();
+
+    // Lista filtrada para a tabela
+    private FilteredList<Produto> filteredData;
+
     @FXML
     public void initialize() {
         // Configurar as CellValueFactories para cada coluna da tabela
-        // Garantindo que o nome da propriedade (em minúsculas) corresponda aos getters na classe Produto
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        colquantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade")); // Já estava correto
-        colPreco.setCellValueFactory(new PropertyValueFactory<>("preco")); // Já estava correto
+        colquantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
-        // Chame o método para carregar os dados quando a tela for inicializada
+        // Carregar os dados iniciais na masterData
         carregarProdutosNaTabela();
+
+        // 1. Wrap the ObservableList in a FilteredList (initially displays all data).
+        filteredData = new FilteredList<>(masterData, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        campoBusca.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(produto -> {
+                // If filter text is empty, display all products.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare marca and modelo with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (produto.getMarca().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches marca.
+                } else if (produto.getModelo().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches modelo.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        // (Optional: Add a Comparator if you want custom sorting beyond table column clicks)
+        SortedList<Produto> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // Otherwise, sorting the table columns would have no effect.
+        sortedData.comparatorProperty().bind(produtosTableView.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        produtosTableView.setItems(sortedData);
     }
 
     @FXML
@@ -123,7 +164,7 @@ public class GerenciarProdutosController {
             }
 
             limparCampos(); // Limpar os campos após o salvar
-            carregarProdutosNaTabela(); // Atualiza a tabela após salvar
+            carregarProdutosNaTabela(); // Atualiza a masterData e o filteredData
         } catch (SQLException e) {
             showErrorAlert("Erro no Banco de Dados", "Erro ao salvar produto: " + e.getMessage());
             e.printStackTrace();
@@ -134,7 +175,7 @@ public class GerenciarProdutosController {
     }
 
 
-   @FXML
+    @FXML
     private void editarProduto() {
         Produto produtoSelecionado = produtosTableView.getSelectionModel().getSelectedItem();
 
@@ -177,7 +218,7 @@ public class GerenciarProdutosController {
             produtoDAO.excluir(idParaExcluir);
             showAlert("Sucesso", "Produto excluído com sucesso!");
             limparCampos(); // Limpar campos após exclusão
-            carregarProdutosNaTabela(); // Atualiza a tabela após a exclusão
+            carregarProdutosNaTabela(); // Atualiza a masterData e o filteredData
         } catch (SQLException e) {
             showErrorAlert("Erro no Banco de Dados", "Erro ao excluir produto: " + e.getMessage());
             e.printStackTrace();
@@ -193,8 +234,12 @@ public class GerenciarProdutosController {
     private void carregarProdutosNaTabela() {
         try {
             List<Produto> produtos = produtoDAO.listarTodos();
-            ObservableList<Produto> produtosList = FXCollections.observableArrayList(produtos);
-            produtosTableView.setItems(produtosList);
+            // Limpa a masterData antes de adicionar os novos dados
+            masterData.clear();
+            masterData.addAll(produtos);
+            // Não atualizamos diretamente o TableView aqui.
+            // O FilteredList e SortedList que estão bindados ao TableView serão atualizados
+            // automaticamente quando a masterData for modificada.
         } catch (Exception e) {
             showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao carregar os produtos.");
             e.printStackTrace();

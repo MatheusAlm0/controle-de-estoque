@@ -55,10 +55,15 @@
         </HBox>
     </VBox>
 
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Buscar por Marca/Modelo:" />
+        <TextField fx:id="campoBusca" promptText="Digite para buscar..." style="-fx-pref-width: 300;" />
+    </HBox>
+
     <TableView fx:id="produtosTableView" VBox.vgrow="ALWAYS"
                style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10;">
         <columns>
-           <TableColumn fx:id="colId" text="Id" minWidth="185" resizable="true">
+            <TableColumn fx:id="colId" text="Id" minWidth="185" resizable="true">
                 <cellValueFactory>
                     <PropertyValueFactory property="id"/> </cellValueFactory>
             </TableColumn>
