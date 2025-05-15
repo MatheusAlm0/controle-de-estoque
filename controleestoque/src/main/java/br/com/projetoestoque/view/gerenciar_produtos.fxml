@@ -14,8 +14,8 @@
     <Label text="Gerenciar Produtos" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
 
     <VBox spacing="15" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 10; -fx-border-color: #CCC; -fx-pref-width: 500;">
-        <HBox spacing="10" alignment="CENTER" style="-fx-pref-width: 100%;">
 
+        <HBox spacing="10" alignment="CENTER" style="-fx-pref-width: 100%;">
             <VBox spacing="10" alignment="CENTER">
                 <Label text="Id:" />
                 <TextField fx:id="idField" style="-fx-padding: 5; -fx-font-size: 14;" />
@@ -45,6 +45,7 @@
                 <TextField fx:id="precoField" style="-fx-padding: 5; -fx-font-size: 14;" />
             </VBox>
         </HBox>
+
         <HBox spacing="10" alignment="CENTER">
             <Button text="Salvar" onAction="#salvarProduto"
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
@@ -55,9 +56,10 @@
         </HBox>
     </VBox>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Buscar por Marca/Modelo:" />
-        <TextField fx:id="campoBusca" promptText="Digite para buscar..." style="-fx-pref-width: 300;" />
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Buscar por Marca/Modelo:" style="-fx-font-size: 14;" />
+        <TextField fx:id="campoBusca" promptText="Digite para buscar..."
+                   style="-fx-font-size: 14; -fx-padding: 5; -fx-pref-width: 300; -fx-margin-top: 10;" />
     </HBox>
 
     <TableView fx:id="produtosTableView" VBox.vgrow="ALWAYS"
@@ -65,23 +67,28 @@
         <columns>
             <TableColumn fx:id="colId" text="Id" minWidth="185" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="id"/> </cellValueFactory>
+                    <PropertyValueFactory property="id"/>
+                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colCodigo" text="Codigo" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="codigo"/> </cellValueFactory>
+                    <PropertyValueFactory property="codigo"/>
+                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colMarca" text="Marca" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="marca"/> </cellValueFactory>
+                    <PropertyValueFactory property="marca"/>
+                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colModelo" text="Modelo" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="modelo"/> </cellValueFactory>
+                    <PropertyValueFactory property="modelo"/>
+                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colCategoria" text="Categoria" minWidth="175" resizable="true">
                 <cellValueFactory>
-                    <PropertyValueFactory property="categoria"/> </cellValueFactory>
+                    <PropertyValueFactory property="categoria"/>
+                </cellValueFactory>
             </TableColumn>
             <TableColumn fx:id="colquantidade" text="quantidade" minWidth="180" resizable="true">
                 <cellValueFactory>
