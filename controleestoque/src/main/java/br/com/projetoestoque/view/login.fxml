@@ -3,21 +3,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <HBox spacing="0" style="-fx-background-color: linear-gradient(to bottom, #E8F7FF, #FFFFFF);"
       xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.projetoestoque.controller.LoginController">
 
-    <!-- Seção da Imagem -->
-    <!-- Seção do Formulário -->
     <VBox alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: white;" prefWidth="400">
-        <!-- Nome do Programa -->
         <Label text="Estoque Fácil" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
 
-        <!-- Título -->
         <Label text="Login" style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #333;" />
 
-        <!-- Formulário -->
         <VBox spacing="15" style="-fx-padding: 10;">
             <TextField fx:id="usernameField" promptText="Usuário"
                        style="-fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #DDD; -fx-border-width: 1;" />
@@ -30,22 +26,24 @@
             </HBox>
 
             <Button text="Entrar" onAction="#handleLogin"
-                    style="-fx-font-size: 16; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8; 
+                    style="-fx-font-size: 16; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;
                            -fx-padding: 10; -fx-cursor: hand;" />
         </VBox>
 
-        <!-- Opções de Login -->
         <Label text="Ou logar com" style="-fx-font-size: 12; -fx-text-fill: #777;" />
         <HBox alignment="CENTER" spacing="10">
-            <Button text="F" style="-fx-font-size: 16; -fx-background-color: #3b5998; -fx-text-fill: white; -fx-background-radius: 50; 
-                                     -fx-min-width: 40; -fx-min-height: 40;" />
-            <Button text="G" style="-fx-font-size: 16; -fx-background-color: #DB4437; -fx-text-fill: white; -fx-background-radius: 50; 
-                                     -fx-min-width: 40; -fx-min-height: 40;" />
-            <Button text="A" style="-fx-font-size: 16; -fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 50; 
-                                     -fx-min-width: 40; -fx-min-height: 40;" />
+            <Button text="F" style="-fx-font-size: 16; -fx-background-color: #3b5998; -fx-text-fill: white; -fx-background-radius: 50;
+                                   -fx-min-width: 40; -fx-min-height: 40;" />
+            <Button text="G" style="-fx-font-size: 16; -fx-background-color: #DB4437; -fx-text-fill: white; -fx-background-radius: 50;
+                                   -fx-min-width: 40; -fx-min-height: 40;" />
+            <Button text="A" style="-fx-font-size: 16; -fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 50;
+                                   -fx-min-width: 40; -fx-min-height: 40;" />
         </HBox>
 
-        <!-- Rodapé -->
         <Label text="Não tem uma conta? Inscrever-se" style="-fx-font-size: 12; -fx-text-fill: #2196F3;" />
     </VBox>
+
+    <StackPane HBox.hgrow="ALWAYS" style="-fx-background-image: url('https://metaro.com.br/conteudos-do-sitio/uploads/2022/01/galpoes-logisticos.jpg'); -fx-background-size: cover; -fx-background-position: center;">
+        </StackPane>
+
 </HBox>
