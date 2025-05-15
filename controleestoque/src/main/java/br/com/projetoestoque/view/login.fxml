@@ -47,7 +47,7 @@
                style="-fx-background-image: url('https://metaro.com.br/conteudos-do-sitio/uploads/2022/01/galpoes-logisticos.jpg');
                       -fx-background-size: cover;
                       -fx-background-position: center;
-                      -fx-opacity: 0.3;">
+                      -fx-opacity: 0.5;">
     </StackPane>
 
 </HBox>
