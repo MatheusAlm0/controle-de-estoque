@@ -43,7 +43,11 @@
         <Label text="Não tem uma conta? Inscrever-se" style="-fx-font-size: 12; -fx-text-fill: #2196F3;" />
     </VBox>
 
-    <StackPane HBox.hgrow="ALWAYS" style="-fx-background-image: url('https://metaro.com.br/conteudos-do-sitio/uploads/2022/01/galpoes-logisticos.jpg'); -fx-background-size: cover; -fx-background-position: center;">
-        </StackPane>
+    <StackPane HBox.hgrow="ALWAYS"
+               style="-fx-background-image: url('https://metaro.com.br/conteudos-do-sitio/uploads/2022/01/galpoes-logisticos.jpg');
+                      -fx-background-size: cover;
+                      -fx-background-position: center;
+                      -fx-opacity: 0.3;">
+    </StackPane>
 
 </HBox>
