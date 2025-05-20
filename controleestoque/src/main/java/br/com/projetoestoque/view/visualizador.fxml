@@ -13,6 +13,7 @@
 
             <!-- Botões de Navegação -->
             <Button text="Visualizar Produtos" fx:id="btnProdutos" onAction="#handleProdutos"
+                    prefWidth="160"
                     style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
             
             <!-- Espaçador flexível -->
@@ -20,6 +21,7 @@
             
             <!-- Botão de Logout -->
             <Button text="Logout" fx:id="btnLogout" onAction="#handleLogout"
+                    prefWidth="160"
                     style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;" />
         </VBox>
     </left>
