@@ -13277,3 +13277,140 @@ CREATE TABLE usuarios (
     nivel_acesso VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL
 ) [42101-214]
+2025-05-15 15:58:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 19:26:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 19:38:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 19:53:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 20:24:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 20:25:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:25:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:25:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:31:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 20:33:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:34:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:35:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 20:35:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 21:07:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-20 21:07:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 21:07:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-20 21:08:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:21:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-21 19:22:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:22:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:22:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:22:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:22:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:22:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUTO" not found; SQL statement:
+SELECT * FROM produto [42102-214]
+2025-05-21 19:27:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-21 19:34:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-21 19:35:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOVIMENTACOES" not found; SQL statement:
+SELECT m.*, p.marca, p.modelo FROM movimentacoes m JOIN produtos p ON m.produto_id = p.id WHERE m.data >= NOW() - INTERVAL '7 days' ORDER BY m.data DESC [42102-214]
+2025-05-21 19:35:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOVIMENTACOES" not found; SQL statement:
+SELECT m.*, p.marca, p.modelo FROM movimentacoes m JOIN produtos p ON m.produto_id = p.id WHERE m.data >= NOW() - INTERVAL '7 days' ORDER BY m.data DESC [42102-214]

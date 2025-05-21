@@ -78,4 +78,13 @@ public class Produto {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
+    public String getNome() {
+        return marca + " " + modelo;
+    }
+
+    public void setId(int int1) {
+        this.id = String.valueOf(int1);
+    }
+
 }
