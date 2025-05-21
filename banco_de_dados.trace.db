@@ -13414,3 +13414,25 @@ SELECT m.*, p.marca, p.modelo FROM movimentacoes m JOIN produtos p ON m.produto_
 2025-05-21 19:35:41 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOVIMENTACOES" not found; SQL statement:
 SELECT m.*, p.marca, p.modelo FROM movimentacoes m JOIN produtos p ON m.produto_id = p.id WHERE m.data >= NOW() - INTERVAL '7 days' ORDER BY m.data DESC [42102-214]
+2025-05-21 19:38:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-21 19:42:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-21 19:42:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOVIMENTACOES" not found; SQL statement:
+SELECT * FROM produtos p WHERE NOT EXISTS (SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= NOW() - INTERVAL '30 days') [42102-214]
+2025-05-21 19:42:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOVIMENTACOES" not found; SQL statement:
+SELECT m.*, p.marca, p.modelo FROM movimentacoes m JOIN produtos p ON m.produto_id = p.id WHERE m.data >= NOW() - INTERVAL '7 days' ORDER BY m.data DESC [42102-214]
