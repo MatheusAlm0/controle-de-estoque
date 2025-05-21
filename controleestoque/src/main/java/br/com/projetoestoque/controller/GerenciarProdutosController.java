@@ -6,8 +6,8 @@ import br.com.projetoestoque.dao.ProdutoDAO;
 import br.com.projetoestoque.model.Produto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList; // Importar FilteredList
-import javafx.collections.transformation.SortedList; // Importar SortedList (opcional, mas recomendado para a tabela)
+import javafx.collections.transformation.FilteredList; 
+import javafx.collections.transformation.SortedList; 
 import javafx.stage.Window;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -36,7 +36,6 @@ public class GerenciarProdutosController {
     @FXML
     private TextField precoField;
 
-    // Novo campo para a busca
     @FXML
     private TextField campoBusca;
 
@@ -53,15 +52,12 @@ public class GerenciarProdutosController {
 
     private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    // Lista original de todos os produtos
     private ObservableList<Produto> masterData = FXCollections.observableArrayList();
 
-    // Lista filtrada para a tabela
     private FilteredList<Produto> filteredData;
 
     @FXML
     public void initialize() {
-        // Configurar as CellValueFactories para cada coluna da tabela
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
@@ -70,41 +66,31 @@ public class GerenciarProdutosController {
         colquantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
-        // Carregar os dados iniciais na masterData
         carregarProdutosNaTabela();
 
-        // 1. Wrap the ObservableList in a FilteredList (initially displays all data).
         filteredData = new FilteredList<>(masterData, p -> true);
 
-        // 2. Set the filter Predicate whenever the filter changes.
         campoBusca.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(produto -> {
-                // If filter text is empty, display all products.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
-                // Compare marca and modelo with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
                 if (produto.getMarca().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches marca.
+                    return true; 
                 } else if (produto.getModelo().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches modelo.
+                    return true; 
                 }
-                return false; // Does not match.
+                return false; 
             });
         });
 
-        // 3. Wrap the FilteredList in a SortedList.
-        // (Optional: Add a Comparator if you want custom sorting beyond table column clicks)
         SortedList<Produto> sortedData = new SortedList<>(filteredData);
 
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        // Otherwise, sorting the table columns would have no effect.
         sortedData.comparatorProperty().bind(produtosTableView.comparatorProperty());
 
-        // 5. Add sorted (and filtered) data to the table.
         produtosTableView.setItems(sortedData);
     }
 
@@ -116,9 +102,8 @@ public class GerenciarProdutosController {
         String categoria = categoriaField.getText().trim();
         String quantidadeStr = quantidadeField.getText().trim();
         String precoStr = precoField.getText().trim();
-        String idStr = idField.getText().trim(); // Capturar o ID
+        String idStr = idField.getText().trim(); 
 
-        // Verificar se os campos obrigatórios estão preenchidos
         if (codigo.isEmpty() || marca.isEmpty() || modelo.isEmpty() || categoria.isEmpty() || quantidadeStr.isEmpty() || precoStr.isEmpty()) {
             showAlert("Erro de Validação", "Todos os campos são obrigatórios!");
             return;
@@ -136,15 +121,12 @@ public class GerenciarProdutosController {
 
         Produto produtoParaSalvar;
         if (idStr.isEmpty()) {
-            // Se o ID está vazio, é um novo produto
             produtoParaSalvar = new Produto();
         } else {
-            // Caso contrário, é um produto existente que será atualizado
             produtoParaSalvar = new Produto();
-            produtoParaSalvar.setId(idStr); // Definir o ID para identificação
+            produtoParaSalvar.setId(idStr); 
         }
 
-        // Preencher os dados
         produtoParaSalvar.setCodigo(codigo);
         produtoParaSalvar.setMarca(marca);
         produtoParaSalvar.setModelo(modelo);
@@ -154,17 +136,15 @@ public class GerenciarProdutosController {
 
         try {
             if (idStr.isEmpty()) {
-                // Se o ID estiver vazio, é um novo produto, então chama o método para inserir
                 produtoDAO.inserir(produtoParaSalvar);
                 showAlert("Sucesso", "Produto cadastrado com sucesso!");
             } else {
-                // Caso contrário, faz a atualização
                 produtoDAO.editar(produtoParaSalvar);
                 showAlert("Sucesso", "Produto atualizado com sucesso!");
             }
 
-            limparCampos(); // Limpar os campos após o salvar
-            carregarProdutosNaTabela(); // Atualiza a masterData e o filteredData
+            limparCampos(); 
+            carregarProdutosNaTabela(); 
         } catch (SQLException e) {
             showErrorAlert("Erro no Banco de Dados", "Erro ao salvar produto: " + e.getMessage());
             e.printStackTrace();
@@ -184,41 +164,39 @@ public class GerenciarProdutosController {
             return;
         }
 
-        // Preencher os campos com os dados do produto selecionado
-        idField.setText(produtoSelecionado.getId()); // Preencher o campo ID
+        idField.setText(produtoSelecionado.getId()); 
         codigoField.setText(produtoSelecionado.getCodigo());
         marcaField.setText(produtoSelecionado.getMarca());
         modeloField.setText(produtoSelecionado.getModelo());
         categoriaField.setText(produtoSelecionado.getCategoria());
-        quantidadeField.setText(String.valueOf(produtoSelecionado.getQuantidade())); // Converter para String
-        precoField.setText(String.valueOf(produtoSelecionado.getPreco())); // Converter para String
+        quantidadeField.setText(String.valueOf(produtoSelecionado.getQuantidade())); 
+        precoField.setText(String.valueOf(produtoSelecionado.getPreco())); 
     }
 
     @FXML
     private void excluirProduto() {
         Produto produtoSelecionado = produtosTableView.getSelectionModel().getSelectedItem();
         if (produtoSelecionado == null) {
-            showAlert("Erro de Seleção", "Nenhum produto selecionado para exclusão!"); // Mensagem mais específica
+            showAlert("Erro de Seleção", "Nenhum produto selecionado para exclusão!"); 
             return;
         }
 
-        // Confirmação antes de excluir (recomendado)
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirmação de Exclusão");
         confirmAlert.setHeaderText(null);
         confirmAlert.setContentText("Tem certeza que deseja excluir o produto selecionado: " + produtoSelecionado.getCodigo() + "?"); // Mostra o código do produto
-        confirmAlert.initOwner(produtosTableView.getScene().getWindow()); // Define o dono do alerta
+        confirmAlert.initOwner(produtosTableView.getScene().getWindow()); 
         if (confirmAlert.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
-            return; // Usuário cancelou a exclusão
+            return; 
         }
 
         try {
-            // Converte o id (String do Model) para int para o método excluir do DAO
+            
             int idParaExcluir = Integer.parseInt(produtoSelecionado.getId());
             produtoDAO.excluir(idParaExcluir);
             showAlert("Sucesso", "Produto excluído com sucesso!");
-            limparCampos(); // Limpar campos após exclusão
-            carregarProdutosNaTabela(); // Atualiza a masterData e o filteredData
+            limparCampos(); 
+            carregarProdutosNaTabela(); 
         } catch (SQLException e) {
             showErrorAlert("Erro no Banco de Dados", "Erro ao excluir produto: " + e.getMessage());
             e.printStackTrace();
@@ -234,12 +212,8 @@ public class GerenciarProdutosController {
     private void carregarProdutosNaTabela() {
         try {
             List<Produto> produtos = produtoDAO.listarTodos();
-            // Limpa a masterData antes de adicionar os novos dados
             masterData.clear();
             masterData.addAll(produtos);
-            // Não atualizamos diretamente o TableView aqui.
-            // O FilteredList e SortedList que estão bindados ao TableView serão atualizados
-            // automaticamente quando a masterData for modificada.
         } catch (Exception e) {
             showErrorAlert("Erro Inesperado", "Ocorreu um erro inesperado ao carregar os produtos.");
             e.printStackTrace();
@@ -247,14 +221,14 @@ public class GerenciarProdutosController {
     }
 
     private void limparCampos() {
-        idField.clear(); // Limpar o campo ID se for o comportamento desejado após cadastro
+        idField.clear(); 
         codigoField.clear();
         marcaField.clear();
         modeloField.clear();
         categoriaField.clear();
         quantidadeField.clear();
         precoField.clear();
-        produtosTableView.getSelectionModel().clearSelection(); // Opcional: Remover a seleção da tabela após limpar ou salvar/excluir
+        produtosTableView.getSelectionModel().clearSelection();
     }
 
     private void showAlert(String title, String message) {
@@ -270,7 +244,7 @@ public class GerenciarProdutosController {
     }
 
     private void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR); // Tipo ERROR
+        Alert alert = new Alert(Alert.AlertType.ERROR); 
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

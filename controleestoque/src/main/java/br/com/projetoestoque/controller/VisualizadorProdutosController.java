@@ -21,16 +21,13 @@ public class VisualizadorProdutosController {
 
     @FXML
     private void salvarProduto() {
-        // Implementar lógica para salvar produto no banco de dados
     }
 
     @FXML
     private void editarProduto() {
-        // Implementar lógica para editar produto no banco de dados
     }
 
     @FXML
     private void excluirProduto() {
-        // Implementar lógica para excluir produto do banco de dados
     }
 }
