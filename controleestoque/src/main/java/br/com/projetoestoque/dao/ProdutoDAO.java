@@ -12,11 +12,8 @@ import java.util.List;
 
 public class ProdutoDAO {
 
-    // Método inserir modificado minimamente para garantir o commit
     public void inserir(Produto produto) throws SQLException {
-        // Usando try-with-resources que fecha a conexão automaticamente
         try (Connection connection = ConexaoBancoDeDados.getConnection()) {
-            // Comando SQL para inserir (coluna 'id' é SERIAL, não incluída)
             String sql = "INSERT INTO produtos (codigo, marca, modelo, categoria, quantidade, preco) VALUES (?, ?, ?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -24,27 +21,19 @@ public class ProdutoDAO {
             statement.setString(2, produto.getMarca());
             statement.setString(3, produto.getModelo());
             statement.setString(4, produto.getCategoria());
-            // Verifique o tipo setInt vs setDouble com base na sua tabela INT vs DOUBLE
-            statement.setInt(5, (int) produto.getQuantidade()); // Mantido original
+            statement.setInt(5, (int) produto.getQuantidade()); 
             statement.setDouble(6, produto.getPreco());
 
-            statement.executeUpdate(); // Executa a inserção
+            statement.executeUpdate(); 
 
-            // *** ALTERAÇÃO MÍNIMA AQUI: Comitar a transação para salvar as mudanças ***
-            connection.commit(); // Garante que a inserção seja salva no banco
+            connection.commit(); 
 
         } catch (SQLException e) {
-             // *** ALTERAÇÃO MÍNIMA AQUI: Fazer rollback em caso de erro (boa prática) ***
-             // Se algo der errado antes do commit, desfaz a operação.
-             // O try-with-resources garante que a conexão será fechada.
-            e.printStackTrace(); // Loga o erro (como no original)
-            throw e; // Relança a exceção (como no original, se houvesse throws)
+            e.printStackTrace(); 
+            throw e; 
         }
-        // A conexão é fechada automaticamente pelo try-with-resources ao sair do bloco try ou catch
     }
 
-    // Os métodos listarTodos, excluir, editar e buscarPorId permanecem como no seu código original
-    // Eles não foram modificados para atender ao pedido de "altere o minimo possivel" e "ajuda somente com isso"
 
     public List<Produto> listarTodos() {
         List<Produto> produtos = new ArrayList<>();

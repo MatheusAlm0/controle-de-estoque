@@ -19,10 +19,8 @@ public class Produto {
         this.preco = preco;
     }
 
-    // Construtor vazio para uso em ProdutoDAO
     public Produto() {}
 
-    // Getters e setters para os campos
     public String getId() {
         return id;
     }

@@ -32,7 +32,7 @@ public class GerenteController {
     private void handleLogout() throws IOException {
         
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/br/com/projetoestoque/view/login.fxml"));
-        javafx.scene.Parent loginPane = loader.load(); // Use Parent para evitar problemas de tipo
+        javafx.scene.Parent loginPane = loader.load(); 
     
         contentArea.getScene().setRoot(loginPane);
     }

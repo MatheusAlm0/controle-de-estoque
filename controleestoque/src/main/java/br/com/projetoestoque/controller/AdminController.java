@@ -30,11 +30,9 @@ public class AdminController {
 
     @FXML
     private void handleLogout() throws IOException {
-        // Carrega a tela de login
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/br/com/projetoestoque/view/login.fxml"));
-        javafx.scene.Parent loginPane = loader.load(); // Use Parent para evitar problemas de tipo
+        javafx.scene.Parent loginPane = loader.load(); 
     
-        // Obtém a cena atual e substitui pelo login
         contentArea.getScene().setRoot(loginPane);
     }
 
