@@ -78,6 +78,18 @@ public class ProdutoDAO {
     }
 
     public void editar(Produto produto) throws SQLException {
+        // 1. Buscar quantidade anterior
+        double quantidadeAnterior = 0;
+        try (Connection connection = ConexaoBancoDeDados.getConnection();
+             PreparedStatement stmt = connection.prepareStatement("SELECT quantidade FROM produtos WHERE id = ?")) {
+            stmt.setString(1, produto.getId());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                quantidadeAnterior = rs.getDouble("quantidade");
+            }
+        }
+
+        // 2. Atualizar produto
         String sql = "UPDATE produtos SET codigo = ?, marca = ?, modelo = ?, categoria = ?, quantidade = ?, preco = ? WHERE id = ?";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -88,6 +100,25 @@ public class ProdutoDAO {
             statement.setDouble(5, produto.getQuantidade());
             statement.setDouble(6, produto.getPreco());
             statement.setString(7, produto.getId());
+            statement.executeUpdate();
+        }
+
+        // 3. Registrar movimentação se houve alteração de quantidade
+        double diferenca = produto.getQuantidade() - quantidadeAnterior;
+        if (diferenca != 0) {
+            String tipo = diferenca > 0 ? "entrada" : "saida";
+            int quantidadeMov = (int) Math.abs(diferenca);
+            registrarMovimentacao(produto.getId(), tipo, quantidadeMov);
+        }
+    }
+
+    private void registrarMovimentacao(String produtoId, String tipo, int quantidade) throws SQLException {
+        String sql = "INSERT INTO movimentacoes (produto_id, tipo, quantidade) VALUES (?, ?, ?)";
+        try (Connection connection = ConexaoBancoDeDados.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, Integer.parseInt(produtoId));
+            statement.setString(2, tipo);
+            statement.setInt(3, quantidade);
             statement.executeUpdate();
         }
     }
@@ -196,7 +227,7 @@ public class ProdutoDAO {
     public List<Produto> listarProdutosInativos(int dias) {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos p WHERE NOT EXISTS (" +
-                     "SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= NOW() - INTERVAL '" + dias + " days')";
+             "SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= DATEADD('DAY', -" + dias + ", NOW()))";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -253,10 +284,10 @@ public class ProdutoDAO {
     public List<String> listarMovimentacoesRecentes(int dias) {
         List<String> movimentacoes = new ArrayList<>();
         String sql = "SELECT m.*, p.marca, p.modelo FROM movimentacoes m " +
-                     "JOIN produtos p ON m.produto_id = p.id " +
-                     "WHERE m.data >= NOW() - INTERVAL '" + dias + " days' ORDER BY m.data DESC";
+             "JOIN produtos p ON m.produto_id = p.id " +
+             "WHERE m.data >= DATEADD('DAY', -" + dias + ", NOW()) ORDER BY m.data DESC";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String linha = String.format(

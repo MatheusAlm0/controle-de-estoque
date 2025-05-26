@@ -18,7 +18,7 @@ CREATE TABLE produtos (
 CREATE TABLE movimentacoes (
     id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,
-    tipo VARCHAR(10) NOT NULL, -- 'entrada' ou 'saida'
+    tipo VARCHAR(10) NOT NULL,
     quantidade INT NOT NULL,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (produto_id) REFERENCES produtos(id)
