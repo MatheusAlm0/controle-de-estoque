@@ -9,19 +9,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.StackPane;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class VisualizarRelatoriosController {
 
     @FXML
     private ComboBox<String> relatorioComboBox;
 
     @FXML
-    private VBox relatorioContainer;
+    private StackPane relatorioContainer;
 
     @FXML
     private TextArea relatorioTextArea;
@@ -122,7 +124,7 @@ public class VisualizarRelatoriosController {
     }
 
     @FXML
-    private void gerarRelatorio() {
+    private StackPane gerarRelatorio() {
         String tipoRelatorio = relatorioComboBox.getValue();
         relatorioTextArea.setVisible(false);
         movimentacoesTableView.setVisible(false);
@@ -202,6 +204,7 @@ public class VisualizarRelatoriosController {
                 relatorioTextArea.setVisible(true);
                 relatorioTextArea.setText("Selecione um tipo de relatório.");
         }
+        return null;
     }
 
     // Classes internas para representar os dados das TableViews

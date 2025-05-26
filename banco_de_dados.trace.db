@@ -15996,3 +15996,203 @@ CREATE TABLE usuarios (
     nivel_acesso VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL
 ) [42101-214]
+2025-05-26 12:32:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 12:36:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 12:44:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 12:51:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 12:59:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:05:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:07:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:09:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:12:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:13:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:16:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:20:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:22:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:23:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:26:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:40:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:41:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:43:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:46:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:47:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:49:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:53:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:53:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:54:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]
+2025-05-26 13:58:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]

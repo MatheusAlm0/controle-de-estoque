@@ -18,10 +18,9 @@
                 style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;"/>
     </HBox>
 
-    <VBox fx:id="relatorioContainer" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10; -fx-padding: 10;">
-        <TextArea fx:id="relatorioTextArea" VBox.vgrow="ALWAYS" visible="false"/>
-
-        <TableView fx:id="movimentacoesTableView" VBox.vgrow="ALWAYS" visible="false">
+    <StackPane fx:id="relatorioContainer" style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10; -fx-padding: 10;">
+        <TextArea fx:id="relatorioTextArea" visible="false"/>
+        <TableView fx:id="movimentacoesTableView" visible="false">
             <columns>
                 <TableColumn fx:id="colDataMov" text="Data" prefWidth="150">
                     <cellValueFactory>
@@ -51,7 +50,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="resumoGeralTableView" VBox.vgrow="ALWAYS" visible="false">
+        <TableView fx:id="resumoGeralTableView" visible="false">
             <columns>
                 <TableColumn fx:id="colProdutoResumo" text="Produto" prefWidth="250">
                     <cellValueFactory>
@@ -76,7 +75,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="estoqueBaixoTableView" VBox.vgrow="ALWAYS" visible="false">
+        <TableView fx:id="estoqueBaixoTableView" visible="false">
             <columns>
                 <TableColumn fx:id="colProdutoBaixo" text="Produto" prefWidth="300">
                     <cellValueFactory>
@@ -91,7 +90,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="categoriaTableView" VBox.vgrow="ALWAYS" visible="false">
+        <TableView fx:id="categoriaTableView" visible="false">
             <columns>
                 <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="200">
                     <cellValueFactory>
@@ -106,7 +105,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="inativosTableView" VBox.vgrow="ALWAYS" visible="false">
+        <TableView fx:id="inativosTableView" visible="false">
             <columns>
                 <TableColumn fx:id="colProdutoInativo" text="Produto" prefWidth="300">
                     <cellValueFactory>
@@ -120,6 +119,6 @@
                 </TableColumn>
             </columns>
         </TableView>
-    </VBox>
+    </StackPane>
 
 </VBox>
