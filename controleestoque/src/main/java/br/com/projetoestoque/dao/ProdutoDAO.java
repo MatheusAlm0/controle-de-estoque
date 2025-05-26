@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,16 +102,16 @@ public class ProdutoDAO {
     }
 
     private void registrarMovimentacao(String produtoId, String tipo, int quantidade) throws SQLException {
-    String sql = "INSERT INTO movimentacoes (produto_id, tipo, quantidade, usuario_id) VALUES (?, ?, ?, ?)";
-    try (Connection connection = ConexaoBancoDeDados.getConnection();
-         PreparedStatement statement = connection.prepareStatement(sql)) {
-        statement.setInt(1, Integer.parseInt(produtoId));
-        statement.setString(2, tipo);
-        statement.setInt(3, quantidade);
-        statement.setInt(4, Sessao.getUsuarioId()); // Adiciona o ID do usuário logado
-        statement.executeUpdate();
+        String sql = "INSERT INTO movimentacoes (produto_id, tipo, quantidade, usuario_id) VALUES (?, ?, ?, ?)";
+        try (Connection connection = ConexaoBancoDeDados.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, Integer.parseInt(produtoId));
+            statement.setString(2, tipo);
+            statement.setInt(3, quantidade);
+            statement.setInt(4, Sessao.getUsuarioId()); // Adiciona o ID do usuário logado
+            statement.executeUpdate();
+        }
     }
-}
 
     public Produto buscarPorId(int id) throws SQLException {
         try (Connection connection = ConexaoBancoDeDados.getConnection()) {
@@ -208,7 +209,7 @@ public class ProdutoDAO {
     public List<Produto> listarProdutosInativos(int dias) {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos p WHERE NOT EXISTS (" +
-                "SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= DATEADD('DAY', -" + dias + ", NOW()))";
+                     "SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= DATEADD('DAY', -" + dias + ", NOW()))";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -259,30 +260,86 @@ public class ProdutoDAO {
         }
     }
 
-    public List<String> listarMovimentacoesRecentes(int dias) {
-        List<String> movimentacoes = new ArrayList<>();
-        String sql = "SELECT m.*, p.marca, p.modelo, u.nome AS nome_usuario FROM movimentacoes m " +
+    public List<MovimentacaoDetalhada> listarMovimentacoesRecentesDetalhado(int dias) {
+        List<MovimentacaoDetalhada> movimentacoes = new ArrayList<>();
+        String sql = "SELECT m.data, m.tipo, m.quantidade, p.marca, p.modelo, u.nome AS nome_usuario " +
+                     "FROM movimentacoes m " +
                      "JOIN produtos p ON m.produto_id = p.id " +
-                     "JOIN usuarios u ON m.usuario_id = u.id " + // Join com a tabela de usuários
+                     "JOIN usuarios u ON m.usuario_id = u.id " +
                      "WHERE m.data >= DATEADD('DAY', -" + dias + ", NOW()) ORDER BY m.data DESC";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            ResultSet rs = statement.executeQuery();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
-                String linha = String.format(
-                    "[%s] %s %s | %s | Qtde: %d | Usuário: %s",
-                    rs.getTimestamp("data").toLocalDateTime().toString(),
-                    rs.getString("marca"),
-                    rs.getString("modelo"),
-                    rs.getString("tipo"),
-                    rs.getInt("quantidade"),
-                    rs.getString("nome_usuario") // Adiciona o nome do usuário
-                );
-                movimentacoes.add(linha);
+                MovimentacaoDetalhada mov = new MovimentacaoDetalhada();
+                mov.setData(rs.getTimestamp("data").toLocalDateTime());
+                mov.setTipo(rs.getString("tipo"));
+                mov.setQuantidade(rs.getInt("quantidade"));
+                mov.setMarca(rs.getString("marca"));
+                mov.setModelo(rs.getString("modelo"));
+                mov.setNomeUsuario(rs.getString("nome_usuario"));
+                movimentacoes.add(mov);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return movimentacoes;
+    }
+
+    public static class MovimentacaoDetalhada {
+        private LocalDateTime data;
+        private String tipo;
+        private int quantidade;
+        private String marca;
+        private String modelo;
+        private String nomeUsuario;
+
+        public LocalDateTime getData() {
+            return data;
+        }
+
+        public void setData(LocalDateTime data) {
+            this.data = data;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        public int getQuantidade() {
+            return quantidade;
+        }
+
+        public void setQuantidade(int quantidade) {
+            this.quantidade = quantidade;
+        }
+
+        public String getMarca() {
+            return marca;
+        }
+
+        public void setMarca(String marca) {
+            this.marca = marca;
+        }
+
+        public String getModelo() {
+            return modelo;
+        }
+
+        public void setModelo(String modelo) {
+            this.modelo = modelo;
+        }
+
+        public String getNomeUsuario() {
+            return nomeUsuario;
+        }
+
+        public void setNomeUsuario(String nomeUsuario) {
+            this.nomeUsuario = nomeUsuario;
+        }
     }
 }

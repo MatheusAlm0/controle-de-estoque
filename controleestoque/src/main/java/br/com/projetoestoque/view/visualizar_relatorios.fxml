@@ -1,12 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.projetoestoque.controller.VisualizarRelatoriosController">
-    <Label text="Visualizar Relatórios" style="-fx-font-size: 20;"/>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.projetoestoque.controller.VisualizarRelatoriosController"
+      spacing="20" alignment="TOP_LEFT"
+      style="-fx-padding: 20; -fx-background-color: #F4F4F4;">
 
-    <ComboBox fx:id="relatorioComboBox"/>
-    <Button text="Gerar Relatório" onAction="#gerarRelatorio"/>
+    <Label text="Visualizar Relatórios" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;"/>
 
-    <TextArea fx:id="relatorioTextArea"/>
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 0;">
+        <Label text="Tipo de Relatório:" style="-fx-font-size: 14;"/>
+        <ComboBox fx:id="relatorioComboBox"/>
+        <Button text="Gerar Relatório" onAction="#gerarRelatorio"
+                style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;"/>
+    </HBox>
+
+    <VBox fx:id="relatorioContainer" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10; -fx-padding: 10;">
+        <TextArea fx:id="relatorioTextArea" VBox.vgrow="ALWAYS" visible="false"/>
+
+        <TableView fx:id="movimentacoesTableView" VBox.vgrow="ALWAYS" visible="false">
+            <columns>
+                <TableColumn fx:id="colDataMov" text="Data" prefWidth="150">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="data"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colProdutoMov" text="Produto" prefWidth="200">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="produtoNome"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colTipoMov" text="Tipo" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="tipo"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colQuantidadeMov" text="Quantidade" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="quantidade"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colUsuarioMov" text="Usuário" prefWidth="150">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nomeUsuario"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <TableView fx:id="resumoGeralTableView" VBox.vgrow="ALWAYS" visible="false">
+            <columns>
+                <TableColumn fx:id="colProdutoResumo" text="Produto" prefWidth="250">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="produtoNome"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colCategoriaResumo" text="Categoria" prefWidth="150">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="categoria"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colQuantidadeResumo" text="Quantidade" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="quantidade"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colPrecoResumo" text="Preço" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="preco"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <TableView fx:id="estoqueBaixoTableView" VBox.vgrow="ALWAYS" visible="false">
+            <columns>
+                <TableColumn fx:id="colProdutoBaixo" text="Produto" prefWidth="300">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="produtoNome"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colQuantidadeBaixo" text="Quantidade" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="quantidade"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <TableView fx:id="categoriaTableView" VBox.vgrow="ALWAYS" visible="false">
+            <columns>
+                <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="200">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="categoria"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colTotalProdutos" text="Total de Produtos" prefWidth="150">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="totalProdutos"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <TableView fx:id="inativosTableView" VBox.vgrow="ALWAYS" visible="false">
+            <columns>
+                <TableColumn fx:id="colProdutoInativo" text="Produto" prefWidth="300">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="produtoNome"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colQuantidadeInativo" text="Quantidade" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="quantidade"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </VBox>
+
 </VBox>
