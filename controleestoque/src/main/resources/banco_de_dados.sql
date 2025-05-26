@@ -21,5 +21,8 @@ CREATE TABLE movimentacoes (
     tipo VARCHAR(10) NOT NULL,
     quantidade INT NOT NULL,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+    usuario_id INT, 
+    FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) 
 );
+

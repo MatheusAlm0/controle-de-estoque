@@ -2,6 +2,7 @@ package br.com.projetoestoque.dao;
 
 import br.com.projetoestoque.model.ConexaoBancoDeDados;
 import br.com.projetoestoque.model.Produto;
+import br.com.projetoestoque.util.Sessao; // Importe a classe Sessao
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,27 +24,17 @@ public class ProdutoDAO {
             statement.setString(2, produto.getMarca());
             statement.setString(3, produto.getModelo());
             statement.setString(4, produto.getCategoria());
-            // Verifique o tipo setInt vs setDouble com base na sua tabela INT vs DOUBLE
-            statement.setInt(5, (int) produto.getQuantidade()); // Mantido original
+            statement.setInt(5, (int) produto.getQuantidade());
             statement.setDouble(6, produto.getPreco());
 
-            statement.executeUpdate(); // Executa a inserção
-
-            // *** ALTERAÇÃO MÍNIMA AQUI: Comitar a transação para salvar as mudanças ***
-            connection.commit(); // Garante que a inserção seja salva no banco
+            statement.executeUpdate();
+            connection.commit();
 
         } catch (SQLException e) {
-             // *** ALTERAÇÃO MÍNIMA AQUI: Fazer rollback em caso de erro (boa prática) ***
-             // Se algo der errado antes do commit, desfaz a operação.
-             // O try-with-resources garante que a conexão será fechada.
-            e.printStackTrace(); // Loga o erro (como no original)
-            throw e; // Relança a exceção (como no original, se houvesse throws)
+            e.printStackTrace();
+            throw e;
         }
-        // A conexão é fechada automaticamente pelo try-with-resources ao sair do bloco try ou catch
     }
-
-    // Os métodos listarTodos, excluir, editar e buscarPorId permanecem como no seu código original
-    // Eles não foram modificados para atender ao pedido de "altere o minimo possivel" e "ajuda somente com isso"
 
     public List<Produto> listarTodos() {
         List<Produto> produtos = new ArrayList<>();
@@ -78,7 +69,6 @@ public class ProdutoDAO {
     }
 
     public void editar(Produto produto) throws SQLException {
-        // 1. Buscar quantidade anterior
         double quantidadeAnterior = 0;
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement stmt = connection.prepareStatement("SELECT quantidade FROM produtos WHERE id = ?")) {
@@ -89,7 +79,6 @@ public class ProdutoDAO {
             }
         }
 
-        // 2. Atualizar produto
         String sql = "UPDATE produtos SET codigo = ?, marca = ?, modelo = ?, categoria = ?, quantidade = ?, preco = ? WHERE id = ?";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -103,7 +92,6 @@ public class ProdutoDAO {
             statement.executeUpdate();
         }
 
-        // 3. Registrar movimentação se houve alteração de quantidade
         double diferenca = produto.getQuantidade() - quantidadeAnterior;
         if (diferenca != 0) {
             String tipo = diferenca > 0 ? "entrada" : "saida";
@@ -113,15 +101,16 @@ public class ProdutoDAO {
     }
 
     private void registrarMovimentacao(String produtoId, String tipo, int quantidade) throws SQLException {
-        String sql = "INSERT INTO movimentacoes (produto_id, tipo, quantidade) VALUES (?, ?, ?)";
-        try (Connection connection = ConexaoBancoDeDados.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, Integer.parseInt(produtoId));
-            statement.setString(2, tipo);
-            statement.setInt(3, quantidade);
-            statement.executeUpdate();
-        }
+    String sql = "INSERT INTO movimentacoes (produto_id, tipo, quantidade, usuario_id) VALUES (?, ?, ?, ?)";
+    try (Connection connection = ConexaoBancoDeDados.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setInt(1, Integer.parseInt(produtoId));
+        statement.setString(2, tipo);
+        statement.setInt(3, quantidade);
+        statement.setInt(4, Sessao.getUsuarioId()); // Adiciona o ID do usuário logado
+        statement.executeUpdate();
     }
+}
 
     public Produto buscarPorId(int id) throws SQLException {
         try (Connection connection = ConexaoBancoDeDados.getConnection()) {
@@ -149,9 +138,8 @@ public class ProdutoDAO {
         String sql = "SELECT * FROM produtos";
 
         try (Connection conn = ConexaoBancoDeDados.getConnection();
-             // Prepare the SQL statement
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Produto p = new Produto();
@@ -170,10 +158,6 @@ public class ProdutoDAO {
         return lista;
     }
 
-
-    // ==============================
-    // 📉 Produtos com estoque baixo
-    // ==============================
     public List<Produto> listarProdutosComEstoqueBaixo(double limite) {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos WHERE quantidade < ?";
@@ -198,9 +182,6 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    // ===========================
-    // 🔕 Produtos inativos (0 un)
-    // ===========================
     public List<Produto> listarProdutosInativos() {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos WHERE quantidade = 0";
@@ -227,7 +208,7 @@ public class ProdutoDAO {
     public List<Produto> listarProdutosInativos(int dias) {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos p WHERE NOT EXISTS (" +
-             "SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= DATEADD('DAY', -" + dias + ", NOW()))";
+                "SELECT 1 FROM movimentacoes m WHERE m.produto_id = p.id AND m.data >= DATEADD('DAY', -" + dias + ", NOW()))";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -248,9 +229,6 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    // ============================
-    // 📊 Resumo geral por categoria
-    // ============================
     public Map<String, Integer> obterResumoPorCategoria() {
         Map<String, Integer> resumo = new HashMap<>();
         String sql = "SELECT categoria, COUNT(*) AS total FROM produtos GROUP BY categoria";
@@ -283,20 +261,22 @@ public class ProdutoDAO {
 
     public List<String> listarMovimentacoesRecentes(int dias) {
         List<String> movimentacoes = new ArrayList<>();
-        String sql = "SELECT m.*, p.marca, p.modelo FROM movimentacoes m " +
-             "JOIN produtos p ON m.produto_id = p.id " +
-             "WHERE m.data >= DATEADD('DAY', -" + dias + ", NOW()) ORDER BY m.data DESC";
+        String sql = "SELECT m.*, p.marca, p.modelo, u.nome AS nome_usuario FROM movimentacoes m " +
+                     "JOIN produtos p ON m.produto_id = p.id " +
+                     "JOIN usuarios u ON m.usuario_id = u.id " + // Join com a tabela de usuários
+                     "WHERE m.data >= DATEADD('DAY', -" + dias + ", NOW()) ORDER BY m.data DESC";
         try (Connection connection = ConexaoBancoDeDados.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String linha = String.format(
-                    "[%s] %s %s | %s | Qtde: %d",
+                    "[%s] %s %s | %s | Qtde: %d | Usuário: %s",
                     rs.getTimestamp("data").toLocalDateTime().toString(),
                     rs.getString("marca"),
                     rs.getString("modelo"),
                     rs.getString("tipo"),
-                    rs.getInt("quantidade")
+                    rs.getInt("quantidade"),
+                    rs.getString("nome_usuario") // Adiciona o nome do usuário
                 );
                 movimentacoes.add(linha);
             }

@@ -70,25 +70,40 @@ public class UsuarioDAO {
      * @param password Senha do usuário
      * @return Nível de acesso (admin, operador, gerente, visualizador) ou nulo se não for autenticado.
      */
-    public String autenticar(String username, String password) {
-        String sql = "SELECT nivel_acesso FROM usuarios WHERE nome = ? AND senha = ?";
-        try (Connection connection = ConexaoBancoDeDados.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet resultSet = statement.executeQuery();
+    public Integer autenticar(String username, String password) {
+    String sql = "SELECT id FROM usuarios WHERE nome = ? AND senha = ?";
+    try (Connection connection = ConexaoBancoDeDados.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, username);
+        statement.setString(2, password);
+        ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                String nivelAcesso = resultSet.getString("nivel_acesso");
-                System.out.println("Usuário autenticado com sucesso: " + username + " | Nível: " + nivelAcesso);
-                return nivelAcesso;
-            } else {
-                System.out.println("Falha na autenticação para o usuário: " + username);
-                return null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (resultSet.next()) {
+            int idUsuario = resultSet.getInt("id");
+            System.out.println("Usuário autenticado com sucesso: " + username + " | ID: " + idUsuario);
+            return idUsuario;
+        } else {
+            System.out.println("Falha na autenticação para o usuário: " + username);
             return null;
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
     }
+}
+
+public String obterNivelAcesso(String username) {
+    String sql = "SELECT nivel_acesso FROM usuarios WHERE nome = ?";
+    try (Connection connection = ConexaoBancoDeDados.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString("nivel_acesso");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
 }
