@@ -18,6 +18,8 @@
                 style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;"/>
     </HBox>
 
+    <Label fx:id="lblValorTotalEstoque" text="" style="-fx-font-size: 16px; -fx-font-weight: bold;" visible="false"/>
+
     <StackPane fx:id="relatorioContainer" style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10; -fx-padding: 10;">
         <TextArea fx:id="relatorioTextArea" visible="false"/>
         <TableView fx:id="movimentacoesTableView" visible="false">

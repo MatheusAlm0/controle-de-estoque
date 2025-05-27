@@ -81,6 +81,9 @@ public class VisualizarRelatoriosController {
     @FXML
     private TableColumn<InativoView, Number> colQuantidadeInativo;
 
+    @FXML
+    private Label lblValorTotalEstoque;
+
     private final ProdutoDAO dao = new ProdutoDAO();
     private final ObservableList<MovimentacaoView> movimentacoesList = FXCollections.observableArrayList();
     private final ObservableList<ResumoGeralView> resumoGeralList = FXCollections.observableArrayList();
@@ -163,6 +166,17 @@ public class VisualizarRelatoriosController {
                             p.getPreco()
                     ));
                 }
+                // Calcule o valor total
+                double valorTotal = resumoGeralList.stream()
+                        .mapToDouble(item -> item.getQuantidade() * item.getPreco())
+                        .sum();
+
+                // Formate o valor com separador de milhar e duas casas decimais
+                String valorFormatado = String.format("Valor total do estoque: R$ %,.2f", valorTotal);
+
+                // Exiba o label
+                lblValorTotalEstoque.setText(valorFormatado);
+                lblValorTotalEstoque.setVisible(true);
                 break;
 
             case "Estoque Baixo":
@@ -220,6 +234,7 @@ public class VisualizarRelatoriosController {
                 relatorioTextArea.setVisible(true);
                 relatorioTextArea.setText("Selecione um tipo de relatório.");
         }
+        lblValorTotalEstoque.setVisible(relatorioComboBox.getValue().equals("Resumo Geral"));
         return null;
     }
 
