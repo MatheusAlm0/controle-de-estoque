@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.projetoestoque.controller.VisualizarRelatoriosController"
-      spacing="20" alignment="TOP_LEFT"
-      style="-fx-padding: 20; -fx-background-color: #F4F4F4;">
+      spacing="28" alignment="TOP_CENTER"
+      style="-fx-padding: 36; -fx-background-color: linear-gradient(to bottom right, #e3f0ff, #f8fbff);">
 
-    <Label text="Visualizar Relatórios" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;"/>
-
-    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 0;">
-        <Label text="Tipo de Relatório:" style="-fx-font-size: 14;"/>
-        <ComboBox fx:id="relatorioComboBox"/>
-        <Button text="Gerar Relatório" onAction="#gerarRelatorio"
-                style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 5;"/>
+    <!-- Título com ícone centralizado -->
+    <HBox alignment="CENTER" spacing="12">
+        <ImageView fitHeight="28" fitWidth="28">
+            <image>
+                <Image url="https://cdn-icons-png.flaticon.com/512/84/84380.png"/>
+            </image>
+        </ImageView>
+        <Label text="Visualizar Relatórios"
+               style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
     </HBox>
 
-    <Label fx:id="lblValorTotalEstoque" text="" style="-fx-font-size: 16px; -fx-font-weight: bold;" visible="false"/>
-   
-   <StackPane fx:id="relatorioContainer" style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10; -fx-padding: 10;">
-        <TextArea fx:id="relatorioTextArea" visible="false"/>
-        <TableView fx:id="movimentacoesTableView" visible="false">
+    <!-- Filtros e ações centralizados -->
+    <HBox spacing="12" alignment="CENTER" style="-fx-padding: 10 0;">
+        <Label text="Tipo de Relatório:" style="-fx-font-size: 15;" />
+        <ComboBox fx:id="relatorioComboBox" style="-fx-font-size: 15;"/>
+        <Button text="Gerar Relatório" onAction="#gerarRelatorio"
+                style="-fx-background-color: linear-gradient(to right, #3498DB, #6DD5FA); -fx-text-fill: white; -fx-font-size: 15; -fx-background-radius: 8; -fx-padding: 8 24;" />
+    </HBox>
+
+    <Label fx:id="lblValorTotalEstoque" text="" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #27AE60;" visible="false" alignment="CENTER"/>
+
+    <!-- Área de relatório centralizada -->
+    <StackPane fx:id="relatorioContainer"
+               style="-fx-background-color: white; -fx-border-color: #B0C4DE; -fx-border-radius: 14; -fx-padding: 18; -fx-effect: dropshadow(gaussian, #b0c4de55, 10, 0.2, 0, 2);"
+               alignment="CENTER">
+        <TextArea fx:id="relatorioTextArea" visible="false"
+                  style="-fx-font-size: 15; -fx-background-color: #f8fbff; -fx-border-radius: 8; -fx-text-alignment: center;" />
+        <TableView fx:id="movimentacoesTableView" visible="false" style="-fx-alignment: CENTER;">
             <columns>
                 <TableColumn fx:id="colDataMov" text="Data" prefWidth="150">
                     <cellValueFactory>
@@ -52,7 +67,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="resumoGeralTableView" visible="false">
+        <TableView fx:id="resumoGeralTableView" visible="false" style="-fx-alignment: CENTER;">
             <columns>
                 <TableColumn fx:id="colProdutoResumo" text="Produto" prefWidth="250">
                     <cellValueFactory>
@@ -77,7 +92,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="estoqueBaixoTableView" visible="false">
+        <TableView fx:id="estoqueBaixoTableView" visible="false" style="-fx-alignment: CENTER;">
             <columns>
                 <TableColumn fx:id="colCodigoBaixo" text="Código">
                     <cellValueFactory>
@@ -102,7 +117,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="categoriaTableView" visible="false">
+        <TableView fx:id="categoriaTableView" visible="false" style="-fx-alignment: CENTER;">
             <columns>
                 <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="200">
                     <cellValueFactory>
@@ -117,7 +132,7 @@
             </columns>
         </TableView>
 
-        <TableView fx:id="inativosTableView" visible="false">
+        <TableView fx:id="inativosTableView" visible="false" style="-fx-alignment: CENTER;">
             <columns>
                 <TableColumn fx:id="colCodigoInativo" text="Código" prefWidth="120">
                     <cellValueFactory>
@@ -142,6 +157,7 @@
             </columns>
         </TableView>
     </StackPane>
-    <Label fx:id="lblMensagemInativos" text="" style="-fx-font-size: 14px;" visible="false"/>
+
+    <Label fx:id="lblMensagemInativos" text="" style="-fx-font-size: 14; -fx-text-fill: #E74C3C;" visible="false" alignment="CENTER"/>
 
 </VBox>
