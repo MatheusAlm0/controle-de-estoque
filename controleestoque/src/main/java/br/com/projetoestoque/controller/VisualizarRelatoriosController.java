@@ -55,7 +55,11 @@ public class VisualizarRelatoriosController {
     @FXML
     private TableView<EstoqueBaixoView> estoqueBaixoTableView;
     @FXML
+    private TableColumn<EstoqueBaixoView, String> colCodigoBaixo;
+    @FXML
     private TableColumn<EstoqueBaixoView, String> colProdutoBaixo;
+    @FXML
+    private TableColumn<EstoqueBaixoView, String> colCategoriaBaixo;
     @FXML
     private TableColumn<EstoqueBaixoView, Number> colQuantidadeBaixo;
 
@@ -69,7 +73,11 @@ public class VisualizarRelatoriosController {
     @FXML
     private TableView<InativoView> inativosTableView;
     @FXML
+    private TableColumn<InativoView, String> colCodigoInativo;
+    @FXML
     private TableColumn<InativoView, String> colProdutoInativo;
+    @FXML
+    private TableColumn<InativoView, String> colCategoriaInativo;
     @FXML
     private TableColumn<InativoView, Number> colQuantidadeInativo;
 
@@ -108,7 +116,9 @@ public class VisualizarRelatoriosController {
         resumoGeralTableView.setItems(resumoGeralList);
 
         // Inicializa as colunas da TableView de Estoque Baixo
+        colCodigoBaixo.setCellValueFactory(cellData -> cellData.getValue().codigoProperty());
         colProdutoBaixo.setCellValueFactory(cellData -> cellData.getValue().produtoNomeProperty());
+        colCategoriaBaixo.setCellValueFactory(cellData -> cellData.getValue().categoriaProperty());
         colQuantidadeBaixo.setCellValueFactory(cellData -> cellData.getValue().quantidadeProperty());
         estoqueBaixoTableView.setItems(estoqueBaixoList);
 
@@ -118,7 +128,9 @@ public class VisualizarRelatoriosController {
         categoriaTableView.setItems(categoriaList);
 
         // Inicializa as colunas da TableView de Produtos Inativos
+        colCodigoInativo.setCellValueFactory(cellData -> cellData.getValue().codigoProperty());
         colProdutoInativo.setCellValueFactory(cellData -> cellData.getValue().produtoNomeProperty());
+        colCategoriaInativo.setCellValueFactory(cellData -> cellData.getValue().categoriaProperty());
         colQuantidadeInativo.setCellValueFactory(cellData -> cellData.getValue().quantidadeProperty());
         inativosTableView.setItems(inativosList);
     }
@@ -158,8 +170,10 @@ public class VisualizarRelatoriosController {
                 List<Produto> baixos = dao.listarProdutosComEstoqueBaixo(5);
                 for (Produto p : baixos) {
                     estoqueBaixoList.add(new EstoqueBaixoView(
-                            p.getMarca() + " " + p.getModelo(),
-                            p.getQuantidade()
+                            p.getCodigo(),             // Código
+                            p.getMarca() + " " + p.getModelo(), // Produto
+                            p.getCategoria(),          // Categoria
+                            p.getQuantidade()          // Quantidade
                     ));
                 }
                 break;
@@ -180,7 +194,9 @@ public class VisualizarRelatoriosController {
                 List<Produto> inativos = dao.listarProdutosInativos(30);
                 for (Produto p : inativos) {
                     inativosList.add(new InativoView(
-                            p.getMarca() + " " + p.getModelo(),
+                            p.getCodigo(), // ok
+                            p.getMarca() + " " + p.getModelo(), // Produto
+                            p.getCategoria(), // ok
                             p.getQuantidade()
                     ));
                 }
@@ -257,15 +273,24 @@ public class VisualizarRelatoriosController {
     }
 
     public static class EstoqueBaixoView {
+        private final SimpleStringProperty codigo;
         private final SimpleStringProperty produtoNome;
+        private final SimpleStringProperty categoria;
         private final SimpleDoubleProperty quantidade;
 
-        public EstoqueBaixoView(String produtoNome, double quantidade) {
+        public EstoqueBaixoView(String codigo, String produtoNome, String categoria, double quantidade) {
+            this.codigo = new SimpleStringProperty(codigo);
             this.produtoNome = new SimpleStringProperty(produtoNome);
+            this.categoria = new SimpleStringProperty(categoria);
             this.quantidade = new SimpleDoubleProperty(quantidade);
         }
+
+        public String getCodigo() { return codigo.get(); }
+        public SimpleStringProperty codigoProperty() { return codigo; }
         public String getProdutoNome() { return produtoNome.get(); }
         public SimpleStringProperty produtoNomeProperty() { return produtoNome; }
+        public String getCategoria() { return categoria.get(); }
+        public SimpleStringProperty categoriaProperty() { return categoria; }
         public double getQuantidade() { return quantidade.get(); }
         public SimpleDoubleProperty quantidadeProperty() { return quantidade; }
     }
@@ -285,15 +310,23 @@ public class VisualizarRelatoriosController {
     }
 
     public static class InativoView {
+        private final SimpleStringProperty codigo;
         private final SimpleStringProperty produtoNome;
+        private final SimpleStringProperty categoria;
         private final SimpleDoubleProperty quantidade;
 
-        public InativoView(String produtoNome, double quantidade) {
+        public InativoView(String codigo, String produtoNome, String categoria, double quantidade) {
+            this.codigo = new SimpleStringProperty(codigo);
             this.produtoNome = new SimpleStringProperty(produtoNome);
+            this.categoria = new SimpleStringProperty(categoria);
             this.quantidade = new SimpleDoubleProperty(quantidade);
         }
+        public String getCodigo() { return codigo.get(); }
+        public SimpleStringProperty codigoProperty() { return codigo; }
         public String getProdutoNome() { return produtoNome.get(); }
         public SimpleStringProperty produtoNomeProperty() { return produtoNome; }
+        public String getCategoria() { return categoria.get(); }
+        public SimpleStringProperty categoriaProperty() { return categoria; }
         public double getQuantidade() { return quantidade.get(); }
         public SimpleDoubleProperty quantidadeProperty() { return quantidade; }
     }

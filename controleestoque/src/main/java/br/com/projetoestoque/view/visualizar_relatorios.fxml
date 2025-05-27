@@ -77,12 +77,22 @@
 
         <TableView fx:id="estoqueBaixoTableView" visible="false">
             <columns>
-                <TableColumn fx:id="colProdutoBaixo" text="Produto" prefWidth="300">
+                <TableColumn fx:id="colCodigoBaixo" text="Código">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="codigo"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colProdutoBaixo" text="Produto">
                     <cellValueFactory>
                         <PropertyValueFactory property="produtoNome"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="colQuantidadeBaixo" text="Quantidade" prefWidth="100">
+                <TableColumn fx:id="colCategoriaBaixo" text="Categoria">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="categoria"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colQuantidadeBaixo" text="Quantidade">
                     <cellValueFactory>
                         <PropertyValueFactory property="quantidade"/>
                     </cellValueFactory>
@@ -107,9 +117,19 @@
 
         <TableView fx:id="inativosTableView" visible="false">
             <columns>
-                <TableColumn fx:id="colProdutoInativo" text="Produto" prefWidth="300">
+                <TableColumn fx:id="colCodigoInativo" text="Código" prefWidth="120">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="codigo"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colProdutoInativo" text="Produto" prefWidth="200">
                     <cellValueFactory>
                         <PropertyValueFactory property="produtoNome"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="colCategoriaInativo" text="Categoria" prefWidth="150">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="categoria"/>
                     </cellValueFactory>
                 </TableColumn>
                 <TableColumn fx:id="colQuantidadeInativo" text="Quantidade" prefWidth="100">
