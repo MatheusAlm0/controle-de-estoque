@@ -4,6 +4,7 @@ import br.com.projetoestoque.main.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import java.io.IOException;
 import javafx.application.Platform;
@@ -55,6 +56,16 @@ public class OperadorController {
     @FXML
     private void handleFechar() {
         Platform.exit();
+    }
+
+    @FXML
+    private void abrirNotificacoes() {
+        try {
+            Parent notificacoesView = FXMLLoader.load(getClass().getResource("/br/com/projetoestoque/view/notificacoes.fxml"));
+            contentArea.getChildren().setAll(notificacoesView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void carregarTela(String fxml) throws IOException {
