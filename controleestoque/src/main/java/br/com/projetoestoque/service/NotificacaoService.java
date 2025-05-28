@@ -34,5 +34,6 @@ public class NotificacaoService {
 
     public void remover(Notificacao n) {
         notificacoes.remove(n);
+        notificacaoDAO.remover(n); // Remove do banco também!
     }
 }

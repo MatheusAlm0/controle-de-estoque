@@ -37,4 +37,15 @@ public class NotificacaoDAO {
         }
         return lista;
     }
+
+    public void remover(Notificacao notificacao) {
+        String sql = "DELETE FROM notificacoes WHERE mensagem = ?";
+        try (Connection conn = ConexaoBancoDeDados.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, notificacao.getMensagem());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

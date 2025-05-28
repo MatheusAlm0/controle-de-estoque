@@ -22,7 +22,7 @@ CREATE TABLE movimentacoes (
     quantidade INT NOT NULL,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     usuario_id INT, 
-    FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) 
 );
 
