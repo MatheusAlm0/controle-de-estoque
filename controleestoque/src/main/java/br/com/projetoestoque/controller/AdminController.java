@@ -7,6 +7,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
 import java.io.IOException;
 import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class AdminController {
 
@@ -59,5 +62,15 @@ public class AdminController {
     private void carregarTela(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/br/com/projetoestoque/" + fxml + ".fxml"));
         contentArea.getChildren().setAll((javafx.scene.Node) loader.load());
+    }
+
+    @FXML
+    private void abrirNotificacoes() {
+        try {
+            Parent notificacoesView = FXMLLoader.load(getClass().getResource("/br/com/projetoestoque/view/notificacoes.fxml"));
+            contentArea.getChildren().setAll(notificacoesView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

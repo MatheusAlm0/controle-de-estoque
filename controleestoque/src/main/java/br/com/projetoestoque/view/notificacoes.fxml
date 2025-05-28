@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="br.com.projetoestoque.controller.NotificacoesController"
+      spacing="18" alignment="TOP_CENTER" style="-fx-padding: 32;">
+    <Label text="Notificações de Estoque Baixo" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+    <VBox fx:id="notificacoesContainer" spacing="12" alignment="TOP_CENTER" prefWidth="480"/>
+    <Label fx:id="lblVazio" text="Nenhuma notificação no momento." style="-fx-font-size: 15; -fx-text-fill: #888;" visible="false"/>
+</VBox>

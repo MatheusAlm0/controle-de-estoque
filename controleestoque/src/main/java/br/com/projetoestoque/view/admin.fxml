@@ -56,6 +56,17 @@
                     </ImageView>
                 </graphic>
             </Button>
+            <Button text=" Notificações" fx:id="btnNotificacoes" onAction="#abrirNotificacoes"
+                    prefWidth="200" graphicTextGap="12"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #6DD5FA); -fx-text-fill: white; -fx-font-size: 15; -fx-background-radius: 10; -fx-padding: 12 0; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="22" fitWidth="22">
+                        <image>
+                            <Image url="https://cdn-icons-png.flaticon.com/512/833/833314.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
 
             <Pane fx:id="spacer" VBox.vgrow="always" />
 
@@ -74,7 +85,6 @@
         </VBox>
     </left>
 
-    <!-- Área central moderna -->
     <center>
         <StackPane fx:id="contentArea" alignment="CENTER"
                    style="-fx-padding: 40; -fx-background-color: linear-gradient(to bottom right, #f8fbff, #e3f0ff);">

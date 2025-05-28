@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import br.com.projetoestoque.dao.ProdutoDAO;
 import br.com.projetoestoque.model.Produto;
+import br.com.projetoestoque.service.NotificacaoService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Window;
@@ -107,6 +108,15 @@ public class GerenciarProdutosOperadorController {
             } else {
                 produtoDAO.editar(produtoParaSalvar);
                 showAlert("Sucesso", "Produto atualizado com sucesso!");
+            }
+
+            if (produtoParaSalvar.getQuantidade() < 5) {
+                NotificacaoService.getInstance().adicionar(
+                    "Produto: " + produtoParaSalvar.getMarca() + " " + produtoParaSalvar.getModelo() +
+                    " | Código: " + produtoParaSalvar.getCodigo() +
+                    " | Quantidade: " + produtoParaSalvar.getQuantidade() +
+                    " - Estoque baixo!"
+                );
             }
 
             limparCampos(); 
