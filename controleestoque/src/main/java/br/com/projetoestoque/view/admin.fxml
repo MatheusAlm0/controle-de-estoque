@@ -51,7 +51,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button text=" Notificações" fx:id="btnNotificacoes" onAction="#abrirNotificacoes"
+            <Button text="       Notificações     "fx:id="btnNotificacoes" onAction="#abrirNotificacoes"
                     prefWidth="200" graphicTextGap="12"
                     style="-fx-background-color: linear-gradient(to right, #3498DB, #6DD5FA); -fx-text-fill: white; -fx-font-size: 15; -fx-background-radius: 10; -fx-padding: 12 0; -fx-cursor: hand;">
                 <graphic>
