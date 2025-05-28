@@ -20,6 +20,8 @@ public class NotificacoesController {
 
     @FXML
     public void initialize() {
+        // Carrega as notificações do banco ao abrir a tela
+        br.com.projetoestoque.service.NotificacaoService.getInstance().carregarDoBanco();
         atualizarNotificacoes();
     }
 

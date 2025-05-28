@@ -26,3 +26,9 @@ CREATE TABLE movimentacoes (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) 
 );
 
+CREATE TABLE notificacoes (
+    id SERIAL PRIMARY KEY,
+    mensagem VARCHAR(500) NOT NULL,
+    lida BOOLEAN DEFAULT FALSE
+);
+
