@@ -23,6 +23,9 @@ public class VisualizarRelatoriosController {
     private ComboBox<String> relatorioComboBox;
 
     @FXML
+    private ComboBox<String> periodoComboBox;
+
+    @FXML
     private StackPane relatorioContainer;
 
     @FXML
@@ -106,6 +109,17 @@ public class VisualizarRelatoriosController {
         );
         relatorioComboBox.getSelectionModel().selectFirst();
 
+        periodoComboBox.getItems().setAll(
+            "Tudo", "1 semana", "1 mês", "3 meses", "6 meses", "1 ano"
+        );
+        periodoComboBox.getSelectionModel().selectFirst();
+        periodoComboBox.setVisible(false);
+
+        relatorioComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
+            boolean mostrarPeriodo = "Entradas/Saídas Recentes".equals(newVal);
+            periodoComboBox.setVisible(mostrarPeriodo);
+        });
+
         // Inicializa as colunas da TableView de Movimentações
         colDataMov.setCellValueFactory(cellData -> cellData.getValue().dataProperty());
         colProdutoMov.setCellValueFactory(cellData -> cellData.getValue().produtoNomeProperty());
@@ -142,8 +156,10 @@ public class VisualizarRelatoriosController {
     }
 
     @FXML
-    private StackPane gerarRelatorio() {
+    private void gerarRelatorio() {
         String tipoRelatorio = relatorioComboBox.getValue();
+        System.out.println("Botão 'Gerar Relatório' clicado. Tipo selecionado: " + tipoRelatorio);
+
         relatorioTextArea.setVisible(false);
         movimentacoesTableView.setVisible(false);
         resumoGeralTableView.setVisible(false);
@@ -159,6 +175,7 @@ public class VisualizarRelatoriosController {
 
         switch (tipoRelatorio) {
             case "Resumo Geral":
+                System.out.println("Entrou no filtro: Resumo Geral");
                 resumoGeralTableView.setVisible(true);
                 List<Produto> todos = dao.listarTodos();
                 for (Produto p : todos) {
@@ -183,6 +200,7 @@ public class VisualizarRelatoriosController {
                 break;
 
             case "Estoque Baixo":
+                System.out.println("Entrou no filtro: Estoque Baixo");
                 estoqueBaixoTableView.setVisible(true);
                 List<Produto> baixos = dao.listarProdutosComEstoqueBaixo(5);
                 for (Produto p : baixos) {
@@ -196,6 +214,7 @@ public class VisualizarRelatoriosController {
                 break;
 
             case "Produtos por Categoria":
+                System.out.println("Entrou no filtro: Produtos por Categoria");
                 categoriaTableView.setVisible(true);
                 Map<String, Integer> resumoCategorias = dao.obterResumoPorCategoria();
                 for (Map.Entry<String, Integer> entry : resumoCategorias.entrySet()) {
@@ -207,6 +226,7 @@ public class VisualizarRelatoriosController {
                 break;
 
             case "Produtos Inativos":
+                System.out.println("Entrou no filtro: Produtos Inativos");
                 inativosTableView.setVisible(true);
                 List<Produto> inativos = dao.listarProdutosInativos(30);
                 for (Produto p : inativos) {
@@ -222,8 +242,28 @@ public class VisualizarRelatoriosController {
                 break;
 
             case "Entradas/Saídas Recentes":
+                System.out.println("Entrou no filtro: Entradas/Saídas Recentes");
                 movimentacoesTableView.setVisible(true);
-                List<ProdutoDAO.MovimentacaoDetalhada> movimentacoesDetalhadas = dao.listarMovimentacoesRecentesDetalhado(7);
+                String periodo = periodoComboBox.getValue();
+                System.out.println("Período selecionado: " + periodo);
+                int dias = -1; // -1 para "Tudo"
+                if (periodo != null) {
+                    switch (periodo) {
+                        case "1 semana": dias = 7; break;
+                        case "1 mês": dias = 30; break;
+                        case "3 meses": dias = 90; break;
+                        case "6 meses": dias = 180; break;
+                        case "1 ano": dias = 365; break;
+                        case "Tudo": dias = -1; break;
+                    }
+                }
+                List<ProdutoDAO.MovimentacaoDetalhada> movimentacoesDetalhadas =
+                    (dias == -1)
+                        ? dao.listarTodasMovimentacoesDetalhado()
+                        : dao.listarMovimentacoesRecentesDetalhado(dias);
+
+                System.out.println("Movimentações encontradas: " + movimentacoesDetalhadas.size());
+
                 for (ProdutoDAO.MovimentacaoDetalhada mov : movimentacoesDetalhadas) {
                     movimentacoesList.add(new MovimentacaoView(
                             mov.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")),
@@ -233,15 +273,16 @@ public class VisualizarRelatoriosController {
                             mov.getNomeUsuario()
                     ));
                 }
+                movimentacoesTableView.setItems(movimentacoesList);
                 break;
 
             default:
+                System.out.println("Nenhum filtro selecionado.");
                 relatorioTextArea.setVisible(true);
                 relatorioTextArea.setText("Selecione um tipo de relatório.");
         }
         lblValorTotalEstoque.setVisible(relatorioComboBox.getValue().equals("Resumo Geral"));
         lblMensagemInativos.setVisible(relatorioComboBox.getValue().equals("Produtos Inativos"));
-        return null;
     }
 
     // Classes internas para representar os dados das TableViews

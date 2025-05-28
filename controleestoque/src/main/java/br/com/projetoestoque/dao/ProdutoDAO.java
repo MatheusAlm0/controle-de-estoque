@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+//import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -261,29 +262,65 @@ public class ProdutoDAO {
     }
 
     public List<MovimentacaoDetalhada> listarMovimentacoesRecentesDetalhado(int dias) {
-        List<MovimentacaoDetalhada> movimentacoes = new ArrayList<>();
         String sql = "SELECT m.data, m.tipo, m.quantidade, p.marca, p.modelo, u.nome AS nome_usuario " +
                      "FROM movimentacoes m " +
                      "JOIN produtos p ON m.produto_id = p.id " +
                      "JOIN usuarios u ON m.usuario_id = u.id " +
-                     "WHERE m.data >= DATEADD('DAY', -" + dias + ", NOW()) ORDER BY m.data DESC";
-        try (Connection connection = ConexaoBancoDeDados.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet rs = statement.executeQuery()) {
-            while (rs.next()) {
-                MovimentacaoDetalhada mov = new MovimentacaoDetalhada();
-                mov.setData(rs.getTimestamp("data").toLocalDateTime());
-                mov.setTipo(rs.getString("tipo"));
-                mov.setQuantidade(rs.getInt("quantidade"));
-                mov.setMarca(rs.getString("marca"));
-                mov.setModelo(rs.getString("modelo"));
-                mov.setNomeUsuario(rs.getString("nome_usuario"));
-                movimentacoes.add(mov);
+                     "WHERE m.data >= ? " +
+                     "ORDER BY m.data DESC";
+        List<MovimentacaoDetalhada> lista = new ArrayList<>();
+        try (Connection conn = ConexaoBancoDeDados.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            // Use o horário local do sistema!
+            LocalDateTime dataLimite = LocalDateTime.now().minusDays(dias);
+            stmt.setTimestamp(1, java.sql.Timestamp.valueOf(dataLimite));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    MovimentacaoDetalhada mov = new MovimentacaoDetalhada(
+                        rs.getTimestamp("data").toLocalDateTime(),
+                        rs.getString("tipo"),
+                        rs.getInt("quantidade"),
+                        rs.getString("marca"),
+                        rs.getString("modelo"),
+                        rs.getString("nome_usuario")
+                    );
+                    lista.add(mov);
+                }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return movimentacoes;
+        return lista;
+    }
+
+    /**
+     * Retorna todas as movimentações detalhadas (sem filtro de data).
+     */
+    public List<MovimentacaoDetalhada> listarTodasMovimentacoesDetalhado() {
+        String sql = "SELECT m.data, m.tipo, m.quantidade, p.marca, p.modelo, u.nome AS nome_usuario " +
+                     "FROM movimentacoes m " +
+                     "JOIN produtos p ON m.produto_id = p.id " +
+                     "JOIN usuarios u ON m.usuario_id = u.id " +
+                     "ORDER BY m.data DESC";
+        List<MovimentacaoDetalhada> lista = new ArrayList<>();
+        try (Connection conn = ConexaoBancoDeDados.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                MovimentacaoDetalhada mov = new MovimentacaoDetalhada(
+                    rs.getTimestamp("data").toLocalDateTime(),
+                    rs.getString("tipo"),
+                    rs.getInt("quantidade"),
+                    rs.getString("marca"),
+                    rs.getString("modelo"),
+                    rs.getString("nome_usuario")
+                );
+                lista.add(mov);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
     public static class MovimentacaoDetalhada {
@@ -293,6 +330,18 @@ public class ProdutoDAO {
         private String marca;
         private String modelo;
         private String nomeUsuario;
+
+        // Construtor completo
+        public MovimentacaoDetalhada(LocalDateTime data, String tipo, int quantidade, String marca, String modelo, String nomeUsuario) {
+            this.data = data;
+            this.tipo = tipo;
+            this.quantidade = quantidade;
+            this.marca = marca;
+            this.modelo = modelo;
+            this.nomeUsuario = nomeUsuario;
+        }
+
+        public MovimentacaoDetalhada() {}
 
         public LocalDateTime getData() {
             return data;

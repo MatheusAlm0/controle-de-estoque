@@ -21,6 +21,7 @@
     <HBox spacing="12" alignment="CENTER" style="-fx-padding: 10 0;">
         <Label text="Tipo de Relatório:" style="-fx-font-size: 15;" />
         <ComboBox fx:id="relatorioComboBox" style="-fx-font-size: 15;"/>
+        <ComboBox fx:id="periodoComboBox" style="-fx-font-size: 15;" visible="false"/>
         <Button text="Gerar Relatório" onAction="#gerarRelatorio"
                 style="-fx-background-color: linear-gradient(to right, #3498DB, #6DD5FA); -fx-text-fill: white; -fx-font-size: 15; -fx-background-radius: 8; -fx-padding: 8 24;" />
     </HBox>
