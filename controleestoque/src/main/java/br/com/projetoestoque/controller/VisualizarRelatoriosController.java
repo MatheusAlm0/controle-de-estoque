@@ -176,6 +176,9 @@ public class VisualizarRelatoriosController {
         categoriaList.clear();
         inativosList.clear();
 
+        // OCULTE SEMPRE ANTES DO SWITCH!
+        lblMensagemEstoqueBaixo.setVisible(false);
+
         switch (tipoRelatorio) {
             case "Resumo Geral":
                 System.out.println("Entrou no filtro: Resumo Geral");
@@ -205,14 +208,14 @@ public class VisualizarRelatoriosController {
             case "Estoque Baixo":
                 System.out.println("Entrou no filtro: Estoque Baixo");
                 estoqueBaixoTableView.setVisible(true);
-                lblMensagemEstoqueBaixo.setVisible(true);
+                lblMensagemEstoqueBaixo.setVisible(true); // Só mostra aqui!
                 List<Produto> baixos = dao.listarProdutosComEstoqueBaixo(5);
                 for (Produto p : baixos) {
                     estoqueBaixoList.add(new EstoqueBaixoView(
-                            p.getCodigo(),             // Código
-                            p.getMarca() + " " + p.getModelo(), // Produto
-                            p.getCategoria(),          // Categoria
-                            p.getQuantidade()          // Quantidade
+                            p.getCodigo(),
+                            p.getMarca() + " " + p.getModelo(),
+                            p.getCategoria(),
+                            p.getQuantidade()
                     ));
                 }
                 break;
