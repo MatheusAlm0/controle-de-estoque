@@ -10,15 +10,12 @@
       style="-fx-padding: 30; -fx-background-color: #F4F4F4;"
       prefWidth="-1" prefHeight="-1"
       maxWidth="Infinity" maxHeight="Infinity">
-
     <Label text="Gerenciar Produtos" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
-
     <HBox spacing="10" alignment="CENTER">
         <Label text="Buscar por Marca/Modelo:" style="-fx-font-size: 14;" />
         <TextField fx:id="campoBusca" promptText="Digite para buscar..."
                    style="-fx-font-size: 14; -fx-padding: 5; -fx-pref-width: 300; -fx-margin-top: 10;" />
     </HBox>
-
     <TableView fx:id="produtosTableView" VBox.vgrow="ALWAYS"
                style="-fx-background-color: white; -fx-border-color: #CCC; -fx-border-radius: 10;">
         <columns>

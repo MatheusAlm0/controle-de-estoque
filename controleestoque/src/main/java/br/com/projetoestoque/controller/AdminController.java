@@ -8,8 +8,7 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 
 public class AdminController {
 
