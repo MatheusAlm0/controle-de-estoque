@@ -8,7 +8,6 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.projetoestoque.controller.GerenciarProdutosOperadorController"
       spacing="28" alignment="TOP_CENTER"
-      style="-fx-padding: 36; -fx-background-color: linear-gradient(to bottom right, #e3f0ff, #f8fbff);"
       prefWidth="-1" prefHeight="-1"
       maxWidth="Infinity" maxHeight="Infinity">
     <HBox alignment="CENTER" spacing="12">

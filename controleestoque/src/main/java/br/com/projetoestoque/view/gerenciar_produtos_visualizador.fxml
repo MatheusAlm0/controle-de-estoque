@@ -7,7 +7,6 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="br.com.projetoestoque.controller.GerenciarProdutosController"
       spacing="20" alignment="CENTER"
-      style="-fx-padding: 30; -fx-background-color: #F4F4F4;"
       prefWidth="-1" prefHeight="-1"
       maxWidth="Infinity" maxHeight="Infinity">
     <Label text="Gerenciar Produtos" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
