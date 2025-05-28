@@ -108,6 +108,11 @@
                 </TableColumn>
             </columns>
         </TableView>
+        <Label fx:id="lblMensagemEstoqueBaixo"
+               text="Produtos com estoque inferior a 5 itens"
+               style="-fx-font-size: 14; -fx-text-fill: #E74C3C;"
+               visible="false"
+               alignment="CENTER"/>
         <TableView fx:id="categoriaTableView" visible="false" style="-fx-alignment: CENTER;">
             <columns>
                 <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="200">
@@ -148,4 +153,5 @@
         </TableView>
     </StackPane>
     <Label fx:id="lblMensagemInativos" text="" style="-fx-font-size: 14; -fx-text-fill: #E74C3C;" visible="false" alignment="CENTER"/>
+    <Label fx:id="lblMensagemEstoqueBaixo" text="Produtos com estoque inferior a 5 itens" style="-fx-font-size: 14; -fx-text-fill: #E74C3C;" visible="false" alignment="CENTER"/>
 </VBox>

@@ -17527,3 +17527,11 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Matheus
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 67 more
+2025-05-28 12:59:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" already exists; SQL statement:
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    nivel_acesso VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+) [42101-214]

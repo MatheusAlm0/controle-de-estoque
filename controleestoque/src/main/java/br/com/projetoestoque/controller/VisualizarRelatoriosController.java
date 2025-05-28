@@ -90,6 +90,9 @@ public class VisualizarRelatoriosController {
     @FXML
     private Label lblMensagemInativos;
 
+    @FXML
+    private Label lblMensagemEstoqueBaixo; // Adicionado para a mensagem de estoque baixo
+
     private final ProdutoDAO dao = new ProdutoDAO();
     private final ObservableList<MovimentacaoView> movimentacoesList = FXCollections.observableArrayList();
     private final ObservableList<ResumoGeralView> resumoGeralList = FXCollections.observableArrayList();
@@ -202,6 +205,7 @@ public class VisualizarRelatoriosController {
             case "Estoque Baixo":
                 System.out.println("Entrou no filtro: Estoque Baixo");
                 estoqueBaixoTableView.setVisible(true);
+                lblMensagemEstoqueBaixo.setVisible(true);
                 List<Produto> baixos = dao.listarProdutosComEstoqueBaixo(5);
                 for (Produto p : baixos) {
                     estoqueBaixoList.add(new EstoqueBaixoView(
