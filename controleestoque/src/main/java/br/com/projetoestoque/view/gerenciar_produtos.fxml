@@ -21,7 +21,7 @@
                style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
     </HBox>
     <VBox spacing="18" alignment="CENTER"
-          style="-fx-background-color: white; -fx-padding: 24; -fx-border-radius: 14; -fx-border-color: #B0C4DE; -fx-effect: dropshadow(gaussian, #b0c4de55, 12, 0.2, 0, 2); -fx-pref-width: 540;">
+          style="-fx-background-color: white; -fx-padding: 24; -fx-pref-width: 540;">
         <HBox spacing="10" alignment="CENTER" style="-fx-pref-width: 100%;">
             <VBox spacing="10" alignment="CENTER">
                 <Label text="Id:" />
