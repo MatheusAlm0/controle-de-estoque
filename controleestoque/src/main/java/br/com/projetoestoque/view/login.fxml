@@ -15,16 +15,16 @@
         </HBox>
         <Label text="Login" style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #333;" />
         <VBox spacing="15" style="-fx-padding: 10;">
-            <TextField fx:id="usernameField" promptText="Usuário"
+            <TextField fx:id="emailField" promptText="Digite seu email"
                        style="-fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #DDD; -fx-border-width: 1;" />
-            <PasswordField fx:id="passwordField" promptText="Senha"
-                        style="-fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #DDD; -fx-border-width: 1;" />
+            <PasswordField fx:id="passwordField" promptText="Digite sua senha"
+                   style="-fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #DDD; -fx-border-width: 1;" />
             <Button text="Entrar" onAction="#handleLogin"
-                       prefWidth="300"
-                        style="-fx-font-size: 16; -fx-background-color: linear-gradient(to right, #2196F3, #6DD5FA); -fx-text-fill: white; -fx-background-radius: 8;
-                        -fx-padding: 10; -fx-cursor: hand;" />
-            <Button text="Esqueci a senha" onAction="#handleEsqueciSenha"/>
-            <Label fx:id="messageLabel" text="" style="-fx-text-fill: #E74C3C; -fx-font-size: 14; -fx-font-weight: bold;" />
+            prefWidth="300"
+            style="-fx-font-size: 16; -fx-background-color: linear-gradient(to right, #2196F3, #6DD5FA); -fx-text-fill: white; -fx-background-radius: 8;
+            -fx-padding: 10; -fx-cursor: hand;" />
+    <Button text="Esqueci a senha" onAction="#handleEsqueciSenha"/>
+    <Label fx:id="messageLabel" text="" style="-fx-text-fill: #E74C3C; -fx-font-size: 14; -fx-font-weight: bold;" />
         </VBox>
     </VBox>
     <StackPane HBox.hgrow="ALWAYS"

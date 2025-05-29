@@ -14,25 +14,25 @@ import java.net.URI;
 public class LoginController {
 
     @FXML
-    private TextField usernameField;
+    private TextField emailField; // era usernameField
 
     @FXML
     private PasswordField passwordField;
 
     @FXML
-    private Label messageLabel; // Alinhe o fx:id no FXML para "messageLabel"
+    private Label messageLabel;
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     @FXML
     private void handleLogin() throws IOException {
-        String username = usernameField.getText();
+        String email = emailField.getText();
         String password = passwordField.getText();
 
         messageLabel.setText(""); // Limpa mensagem anterior
 
-        Integer usuarioId = usuarioDAO.autenticar(username, password);
-        String nivel = usuarioDAO.obterNivelAcesso(username);
+        Integer usuarioId = usuarioDAO.autenticarPorEmail(email, password);
+        String nivel = usuarioDAO.obterNivelAcessoPorEmail(email);
 
         if (usuarioId != null && nivel != null) {
             Sessao.setUsuarioId(usuarioId);
@@ -54,7 +54,7 @@ public class LoginController {
                     messageLabel.setText("Erro ao identificar o nível de acesso.");
             }
         } else {
-            messageLabel.setText("Usuário ou senha incorretos.");
+            messageLabel.setText("Email ou senha incorretos.");
         }
     }
 

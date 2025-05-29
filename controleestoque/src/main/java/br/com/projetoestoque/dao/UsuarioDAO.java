@@ -107,11 +107,48 @@ public class UsuarioDAO {
     }
 }
 
+public Integer autenticarPorEmail(String email, String senha) {
+    String sql = "SELECT id FROM usuarios WHERE email = ? AND senha = ?";
+    try (Connection connection = ConexaoBancoDeDados.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, email);
+        statement.setString(2, senha);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int idUsuario = resultSet.getInt("id");
+            System.out.println("Usuário autenticado com sucesso: " + email + " | ID: " + idUsuario);
+            return idUsuario;
+        } else {
+            System.out.println("Falha na autenticação para o email: " + email);
+            return null;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+
 public String obterNivelAcesso(String username) {
     String sql = "SELECT nivel_acesso FROM usuarios WHERE nome = ?";
     try (Connection connection = ConexaoBancoDeDados.getConnection();
          PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString("nivel_acesso");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+public String obterNivelAcessoPorEmail(String email) {
+    String sql = "SELECT nivel_acesso FROM usuarios WHERE email = ?";
+    try (Connection connection = ConexaoBancoDeDados.getConnection();
+         PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setString(1, email);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getString("nivel_acesso");

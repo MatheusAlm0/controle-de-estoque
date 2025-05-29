@@ -147,4 +147,28 @@ public class GerenciarUsuariosController {
         filteredList = new FilteredList<>(usuariosList, p -> true);
         tabelaUsuarios.setItems(filteredList);
     }
+
+    @FXML
+    private void handleSalvarUsuario() {
+        String nome = nomeField.getText();
+        String nivelAcesso = nivelAcessoComboBox.getValue();
+        String senha = senhaField.getText();
+        String email = emailField.getText();
+
+        if (nome.isEmpty() || nivelAcesso == null || senha.isEmpty() || email.isEmpty()) {
+            showAlert("Erro", "Todos os campos são obrigatórios!");
+            return;
+        }
+
+        Usuario usuario = new Usuario(nome, nivelAcesso, senha, email);
+
+        try {
+            usuarioDAO.inserir(usuario);
+            showAlert("Sucesso", "Usuário cadastrado com sucesso!");
+            carregarUsuarios();
+        } catch (SQLException e) {
+            showAlert("Erro", "Erro ao cadastrar usuário: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
