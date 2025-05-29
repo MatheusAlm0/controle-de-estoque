@@ -60,12 +60,12 @@ public class LoginController {
 
     @FXML
     private void handleEsqueciSenha() {
-        //String emailUsuario = usernameField.getText();
         String assunto = "Esqueci minha senha :(";
         String corpo = "Preciso trocar minha senha!";
+        String destinatarios = "matheusalmeida8742@gmail.com,lucasp.caldeira@gmail.com";
         String gmailUrl = String.format(
-            "https://mail.google.com/mail/?view=cm&fs=1&to=matheusalmeida8742@gmail.com&su=%s&body=%s",
-            encode(assunto), encode(corpo)
+            "https://mail.google.com/mail/?view=cm&fs=1&to=%s&su=%s&body=%s",
+            encode(destinatarios), encode(assunto), encode(corpo)
         );
         try {
             Desktop.getDesktop().browse(new URI(gmailUrl));
