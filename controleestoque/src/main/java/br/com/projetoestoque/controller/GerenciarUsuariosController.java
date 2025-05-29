@@ -18,11 +18,13 @@ public class GerenciarUsuariosController {
     @FXML private TextField nomeField;
     @FXML private ComboBox<String> nivelAcessoComboBox;
     @FXML private PasswordField senhaField;
-    @FXML private TableView<Usuario> usuariosTableView;
+    @FXML private TableView<Usuario> tabelaUsuarios;
     @FXML private TableColumn<Usuario, String> colNome;
     @FXML private TableColumn<Usuario, String> colNivelAcesso;
     @FXML private TableColumn<Usuario, String> colSenha;
+    @FXML private TableColumn<Usuario, String> colunaEmail;
     @FXML private TextField buscarField;
+    @FXML private TextField emailField;
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
     private ObservableList<Usuario> usuariosList;
@@ -35,19 +37,20 @@ public class GerenciarUsuariosController {
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colNivelAcesso.setCellValueFactory(new PropertyValueFactory<>("nivelAcesso"));
         colSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
+        colunaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         colNome.setStyle("-fx-alignment: CENTER;");
         colNivelAcesso.setStyle("-fx-alignment: CENTER;");
         colSenha.setStyle("-fx-alignment: CENTER;");
 
-        colNome.prefWidthProperty().bind(usuariosTableView.widthProperty().multiply(0.4));
-        colNivelAcesso.prefWidthProperty().bind(usuariosTableView.widthProperty().multiply(0.4));
-        colSenha.prefWidthProperty().bind(usuariosTableView.widthProperty().multiply(0.2));
+        colNome.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.4));
+        colNivelAcesso.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.4));
+        colSenha.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.2));
 
         try {
             carregarUsuarios();
         } catch (SQLException e) {
-            e.printStackTrace();
+            showAlert("Erro", "Erro ao carregar usuários: " + e.getMessage());
         }
     }
 
@@ -56,13 +59,14 @@ public class GerenciarUsuariosController {
         String nome = nomeField.getText().trim();
         String nivelAcesso = nivelAcessoComboBox.getValue();
         String senha = senhaField.getText().trim();
+        String email = emailField.getText().trim();
 
-        if (nome.isEmpty() || nivelAcesso == null || senha.isEmpty()) {
+        if (nome.isEmpty() || nivelAcesso == null || senha.isEmpty() || email.isEmpty()) {
             showAlert("Erro", "Todos os campos são obrigatórios!");
             return;
         }
 
-        Usuario usuario = new Usuario(nome, nivelAcesso, senha);
+        Usuario usuario = new Usuario(nome, nivelAcesso, senha, email);
 
         try {
             usuarioDAO.inserir(usuario);
@@ -76,7 +80,7 @@ public class GerenciarUsuariosController {
 
     @FXML
     private void excluirUsuario() {
-        Usuario usuarioSelecionado = usuariosTableView.getSelectionModel().getSelectedItem();
+        Usuario usuarioSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
         if (usuarioSelecionado == null) {
             showAlert("Erro", "Nenhum usuário selecionado!");
             return;
@@ -94,31 +98,22 @@ public class GerenciarUsuariosController {
 
     @FXML
     private void editarUsuario() {
-        Usuario usuarioSelecionado = usuariosTableView.getSelectionModel().getSelectedItem();
+        Usuario usuarioSelecionado = tabelaUsuarios.getSelectionModel().getSelectedItem();
         if (usuarioSelecionado == null) {
-            showAlert("Erro", "Nenhum usuário selecionado!");
+            showAlert("Erro", "Selecione um usuário para editar!");
             return;
         }
-
-        String nome = nomeField.getText().trim();
-        String nivelAcesso = nivelAcessoComboBox.getValue();
-        String senha = senhaField.getText().trim();
-
-        if (nome.isEmpty() || nivelAcesso == null || senha.isEmpty()) {
-            showAlert("Erro", "Todos os campos são obrigatórios!");
-            return;
-        }
-
-        usuarioSelecionado.setNome(nome);
-        usuarioSelecionado.setNivelAcesso(nivelAcesso);
-        usuarioSelecionado.setSenha(senha);
+        usuarioSelecionado.setNome(nomeField.getText().trim());
+        usuarioSelecionado.setNivelAcesso(nivelAcessoComboBox.getValue());
+        usuarioSelecionado.setSenha(senhaField.getText().trim());
+        usuarioSelecionado.setEmail(emailField.getText().trim());
 
         try {
-            usuarioDAO.editar(usuarioSelecionado);
-            showAlert("Sucesso", "Usuário editado com sucesso!");
+            usuarioDAO.atualizar(usuarioSelecionado);
+            showAlert("Sucesso", "Usuário atualizado com sucesso!");
             carregarUsuarios();
         } catch (SQLException e) {
-            showAlert("Erro", "Erro ao editar usuário: " + e.getMessage());
+            showAlert("Erro", "Erro ao atualizar usuário: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -140,7 +135,7 @@ public class GerenciarUsuariosController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        Window window = usuariosTableView.getScene().getWindow();
+        Window window = tabelaUsuarios.getScene().getWindow();
         alert.initOwner(window);
         alert.showAndWait();
     }
@@ -149,6 +144,6 @@ public class GerenciarUsuariosController {
         List<Usuario> usuarios = usuarioDAO.listarTodos();
         usuariosList = FXCollections.observableArrayList(usuarios);
         filteredList = new FilteredList<>(usuariosList, p -> true);
-        usuariosTableView.setItems(filteredList);
+        tabelaUsuarios.setItems(filteredList);
     }
 }

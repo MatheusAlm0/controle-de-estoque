@@ -13,13 +13,14 @@ import java.util.List;
 public class UsuarioDAO {
 
     public void inserir(Usuario usuario) throws SQLException {
-        try (Connection connection = ConexaoBancoDeDados.getConnection()) {
-            String sql = "INSERT INTO usuarios (nome, nivel_acesso, senha) VALUES (?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, usuario.getNome());
-            statement.setString(2, usuario.getNivelAcesso());
-            statement.setString(3, usuario.getSenha());
-            statement.executeUpdate();
+        String sql = "INSERT INTO USUARIOS (NOME, NIVEL_ACESSO, SENHA, EMAIL) VALUES (?, ?, ?, ?)";
+        try (Connection conn = ConexaoBancoDeDados.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getNivelAcesso());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getEmail());
+            stmt.executeUpdate();
         }
     }
 
@@ -35,6 +36,7 @@ public class UsuarioDAO {
                 usuario.setNome(resultSet.getString("nome"));
                 usuario.setNivelAcesso(resultSet.getString("nivel_acesso"));
                 usuario.setSenha(resultSet.getString("senha"));
+                usuario.setEmail(resultSet.getString("email"));
                 usuarios.add(usuario);
             }
         } catch (SQLException e) {
@@ -61,6 +63,19 @@ public class UsuarioDAO {
             statement.setString(3, usuario.getSenha());
             statement.setInt(4, usuario.getId());
             statement.executeUpdate();
+        }
+    }
+
+    public void atualizar(Usuario usuario) throws SQLException {
+        String sql = "UPDATE USUARIOS SET NOME = ?, NIVEL_ACESSO = ?, SENHA = ?, EMAIL = ? WHERE ID = ?";
+        try (Connection conn = ConexaoBancoDeDados.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getNivelAcesso());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getEmail());
+            stmt.setInt(5, usuario.getId());
+            stmt.executeUpdate();
         }
     }
 

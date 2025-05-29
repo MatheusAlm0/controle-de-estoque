@@ -65,6 +65,11 @@
                     <PropertyValueFactory property="senha"/>
                 </cellValueFactory>
             </TableColumn>
+            <TableColumn fx:id="colunaEmail" text="Email" prefWidth="200">
+                <cellValueFactory>
+                    <PropertyValueFactory property="email"/>
+                </cellValueFactory>
+            </TableColumn>
         </columns>
     </TableView>
 </VBox>

@@ -23,6 +23,7 @@
                        prefWidth="300"
                         style="-fx-font-size: 16; -fx-background-color: linear-gradient(to right, #2196F3, #6DD5FA); -fx-text-fill: white; -fx-background-radius: 8;
                         -fx-padding: 10; -fx-cursor: hand;" />
+            <Button text="Esqueci a senha" onAction="#handleEsqueciSenha"/>
             <Label fx:id="messageLabel" text="" style="-fx-text-fill: #E74C3C; -fx-font-size: 14; -fx-font-weight: bold;" />
         </VBox>
     </VBox>

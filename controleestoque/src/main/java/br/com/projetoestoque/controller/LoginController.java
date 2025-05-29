@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
 
 public class LoginController {
 
@@ -53,6 +55,30 @@ public class LoginController {
             }
         } else {
             messageLabel.setText("Usuário ou senha incorretos.");
+        }
+    }
+
+    @FXML
+    private void handleEsqueciSenha() {
+        //String emailUsuario = usernameField.getText();
+        String assunto = "Esqueci minha senha :(";
+        String corpo = "Preciso trocar minha senha!";
+        String gmailUrl = String.format(
+            "https://mail.google.com/mail/?view=cm&fs=1&to=matheusalmeida8742@gmail.com&su=%s&body=%s",
+            encode(assunto), encode(corpo)
+        );
+        try {
+            Desktop.getDesktop().browse(new URI(gmailUrl));
+        } catch (Exception e) {
+            messageLabel.setText("Não foi possível abrir o Gmail no navegador.");
+        }
+    }
+
+    private String encode(String texto) {
+        try {
+            return java.net.URLEncoder.encode(texto, "UTF-8").replace("+", "%20");
+        } catch (Exception e) {
+            return texto;
         }
     }
 }
