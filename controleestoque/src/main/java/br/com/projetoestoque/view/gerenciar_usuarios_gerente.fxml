@@ -32,6 +32,10 @@
                 <Label text="Senha:" />
                 <PasswordField fx:id="senhaField" style="-fx-padding: 5; -fx-font-size: 14;" />
             </VBox>
+            <VBox spacing="10" alignment="CENTER">
+                <Label text="Email:" />
+                <TextField fx:id="emailField" style="-fx-padding: 5; -fx-font-size: 14;" />
+            </VBox>
         </HBox>
         <HBox spacing="12" alignment="CENTER">
             <Button text="Cadastrar" onAction="#cadastrarUsuario"
@@ -47,7 +51,7 @@
         <TextField fx:id="buscarField" onKeyReleased="#filtrarUsuarios"
                    style="-fx-font-size: 15; -fx-padding: 5; -fx-pref-width: 300;" />
     </HBox>
-    <TableView fx:id="usuariosTableView" prefHeight="250" prefWidth="450" VBox.vgrow="ALWAYS"
+    <TableView fx:id="tabelaUsuarios" prefHeight="250" prefWidth="450" VBox.vgrow="ALWAYS"
                style="-fx-background-color: white; -fx-border-color: #B0C4DE; -fx-border-radius: 14; -fx-effect: dropshadow(gaussian, #b0c4de55, 12, 0.2, 0, 2);">
         <columns>
             <TableColumn fx:id="colNome" text="Nome" prefWidth="180">
