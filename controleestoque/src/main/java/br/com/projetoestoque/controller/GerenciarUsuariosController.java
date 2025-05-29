@@ -39,13 +39,14 @@ public class GerenciarUsuariosController {
         colSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
         colunaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        colNome.setStyle("-fx-alignment: CENTER;");
-        colNivelAcesso.setStyle("-fx-alignment: CENTER;");
-        colSenha.setStyle("-fx-alignment: CENTER;");
+        //colNome.setStyle("-fx-alignment: CENTER;");
+        //colNivelAcesso.setStyle("-fx-alignment: CENTER;");
+        //colSenha.setStyle("-fx-alignment: CENTER;");
 
-        colNome.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.4));
-        colNivelAcesso.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.4));
-        colSenha.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.2));
+        colNome.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.15));
+        colNivelAcesso.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.15));
+        colSenha.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.15));
+        colunaEmail.prefWidthProperty().bind(tabelaUsuarios.widthProperty().multiply(0.25));
 
         try {
             carregarUsuarios();
